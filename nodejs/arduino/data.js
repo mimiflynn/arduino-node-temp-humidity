@@ -2,6 +2,7 @@ const serialport = require('serialport');
 const SerialPort = serialport.SerialPort;
 const parsers = serialport.parsers;
 const _ = require('underscore');
+const io = require('socket.io')();
 
 const arduino = new SerialPort('/dev/cu.usbmodem1421', {
   baudrate: 9600,
@@ -16,7 +17,7 @@ const getArduinoPort = () => {
   });
 
   return com;
-}
+};
 
 arduino.on('open', () => {
   console.log('Port Open');
@@ -24,4 +25,6 @@ arduino.on('open', () => {
 
 arduino.on('data', (data) => {
   console.log(data);
+  io.emit(data);
 });
+

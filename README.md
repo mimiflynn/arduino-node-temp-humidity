@@ -19,3 +19,9 @@ https://plot.ly/arduino/dht22-temperature-tutorial/
 https://learn.adafruit.com/dht
 
 https://github.com/bblanchon/ArduinoJson
+
+## Todo
+
+replace underscore with lodash
+
+update front-end to more modern whatnot
