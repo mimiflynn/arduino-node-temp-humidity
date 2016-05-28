@@ -7,6 +7,7 @@
 - save data from Arduino into database
 - pull data from the database and display
 - make it pretty
+- socket.io updates
 
 ## Development
 

@@ -27,7 +27,7 @@ exports.user = {
  *  Recipe authorization routing middleware
  */
 
-exports.recipe = {
+exports.dht = {
   hasAuthorization: function (req, res, next) {
     if (req.article.user.id != req.user.id) {
       req.flash('info', 'You are not authorized')

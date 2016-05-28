@@ -9,7 +9,7 @@ var auth = require('./middlewares/authorization');
 
 var home = require('home');
 var users = require('users');
-var recipes = require('recipes');
+var dht = require('dht');
 var tags = require('tags');
 var comments = require('comments');
 
@@ -21,7 +21,7 @@ var authOptions = {
   failureFlash: 'Invalid email or password.'
 };
 
-var recipeAuth = [auth.requiresLogin, auth.recipe.hasAuthorization];
+var dhtAuth = [auth.requiresLogin, auth.dht.hasAuthorization];
 var commentAuth = [auth.requiresLogin, auth.comment.hasAuthorization];
 
 /**
@@ -32,35 +32,32 @@ module.exports = function (app, passport) {
 
   app.get('/', home.index);
 
-  // recipe routes
-  app.param('id', recipes.load);
-  app.get('/recipes', recipes.index);
-  app.get('/recipes/new', auth.requiresLogin, recipes.new);
-  app.get('/recipes/:id', recipes.show);
-  app.get('/recipes/:id/edit', recipeAuth, recipes.edit);
+  // dht routes
+  app.param('id', dht.load);
+  app.get('/dht', dht.index);
+  app.get('/dht/new', auth.requiresLogin, dht.new);
+  app.get('/dht/:id', dht.show);
+  app.get('/dht/:id/edit', dhtAuth, dht.edit);
 
-  app.get('/api/recipes', recipes.all);
-  app.post('/api/recipes', auth.requiresLogin, recipes.create);
-  app.put('/api/recipes/:id', recipeAuth, recipes.update);
-  app.delete('/api/recipes/:id', recipeAuth, recipes.destroy);
+  app.get('/api/dht', dht.all);
+  app.post('/api/dht', auth.requiresLogin, dht.create);
+  app.put('/api/dht/:id', dhtAuth, dht.update);
+  app.delete('/api/dht/:id', dhtAuth, dht.destroy);
 
   // comment routes
   app.param('commentId', comments.load);
-  app.post('/recipes/:id/comments', auth.requiresLogin, comments.create);
-  app.get('/recipes/:id/comments', auth.requiresLogin, comments.create);
-  app.delete('/recipes/:id/comments/:commentId', commentAuth, comments.destroy);
-
-  // tag routes
-  app.get('/tags/:tag', tags.index);
+  app.post('/dht/:id/comments', auth.requiresLogin, comments.create);
+  app.get('/dht/:id/comments', auth.requiresLogin, comments.create);
+  app.delete('/dht/:id/comments/:commentId', commentAuth, comments.destroy);
 
   // user routes
   app.get('/login', users.login);
   app.get('/signup', users.signup);
   app.get('/logout', users.logout);
   app.get('/users/:userId', users.show);
-  
+
   app.get('/api/loggedin', users.loggedin);
-  
+
   app.post('/users', users.create);
   app.post('/users/session',
     passport.authenticate('local', authOptions), users.session);
