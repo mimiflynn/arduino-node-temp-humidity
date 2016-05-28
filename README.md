@@ -6,10 +6,14 @@ Will eventually be a browser based interface to view temperature and humidity da
 
 ## Requirements
 
-NodeJS
-Arduino
-DHT22 sensor
-Arduino IDE
+- NodeJS
+- Arduino
+- DHT22 sensor
+- Arduino IDE
+- [DHT Sensor Library](https://github.com/adafruit/DHT-sensor-library)
 
-[DHT Sensor Library](https://github.com/adafruit/DHT-sensor-library)
+## Credits
 
+https://plot.ly/arduino/dht22-temperature-tutorial/
+
+https://learn.adafruit.com/dht\
