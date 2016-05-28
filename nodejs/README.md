@@ -1,6 +1,12 @@
-# Recipes
+# Arduino Temperature and Humidity Data Viewer
 
-A recipe book written in MERN (Mongodb, Express, React, Node) and utilizing Flux and Webpack.
+## To Do
+
+- remove old recipe whatnot
+- create model for temperature and humidity data
+- save data from Arduino into database
+- pull data from the database and display
+- make it pretty
 
 ## Development
 
@@ -22,7 +28,7 @@ A boilerplate application for building web apps using express, mongoose and pass
 Read the [wiki](https://github.com/madhums/node-express-mongoose/wiki) to understand how the application is structured.
 
 ## Installation and Usage
-    
+
     $ git clone https://github.com/madhums/node-express-mongoose.git
     $ cd node-express-mongoose
     $ npm install
