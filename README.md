@@ -17,3 +17,5 @@ Will eventually be a browser based interface to view temperature and humidity da
 https://plot.ly/arduino/dht22-temperature-tutorial/
 
 https://learn.adafruit.com/dht
+
+https://github.com/bblanchon/ArduinoJson
