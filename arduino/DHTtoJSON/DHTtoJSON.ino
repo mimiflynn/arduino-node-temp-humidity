@@ -57,8 +57,8 @@ void loop() {
   root["humidity"] = h;
   root["celsius"] = t;
   root["fahrenheit"] = f;
-  root["heat-index-celsius"] = hic;
-  root["heat-index-fahrenheit"] = hif;
+  root["hic"] = hic;
+  root["hif"] = hif;
   
   root.printTo(Serial);
 

@@ -9,15 +9,15 @@ exports.index = function (req, res) {
     page: page
   };
 
-  Recipe.list(options, function (err, recipes) {
+  Recipe.list(options, function (err, data) {
     if (err) return res.render('500');
     Recipe.count().exec(function (err, count) {
       res.render('home/index', {
-        title: 'Recipes',
+        title: 'Temperature and Humidity',
         isAuthenticated: req.isAuthenticated(),
         user: req.isAuthenticated() ? req.user : {},
         scripts: ['/js/app.js'],
-        recipes: recipes,
+        data: data,
         page: page + 1,
         pages: Math.ceil(count / perPage)
       });

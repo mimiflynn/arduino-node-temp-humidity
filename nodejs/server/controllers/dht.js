@@ -38,59 +38,12 @@ exports.all = function (req, res) {
 
 /**
  * Create an dht
- * Upload an image
  */
 
 exports.create = function (req, res) {
-  var dht = new dht(req.body);
-  var images;
-
-  if (typeof req.files !== 'undefined') {
-    images = [req.files.image];
-  } else {
-    images = undefined;
-  }
-
-  dht.user = req.user;
-  dht.uploadAndSave(images, function (err) {
-    if (!err) {
-      req.flash('success', 'Successfully created dht!');
-      return res.redirect('/dht/'+dht._id);
-    }
-    res.render('dht/new', {
-      title: 'New dht',
-      isAuthenticated: req.isAuthenticated(),
-      dht: dht,
-      errors: utils.errors(err.errors || err)
-    });
-  });
-};
-
-/**
- * Update dht
- */
-
-exports.update = function (req, res){
-  var dht = req.dht;
-  var images = req.files.image
-    ? [req.files.image]
-    : undefined;
-
-  // make sure no one changes the user
-  delete req.body.user;
-  dht = extend(dht, req.body);
-
-  dht.uploadAndSave(images, function (err) {
-    if (!err) {
-      return res.redirect('/dht/' + dht._id);
-    }
-
-    res.render('dht/edit', {
-      title: 'Edit dht',
-      isAuthenticated: req.isAuthenticated(),
-      dht: dht,
-      errors: utils.errors(err.errors || err)
-    });
+  var dht = new Dht(req.body);
+  dht.save((err) => {
+    console.error(err);
   });
 };
 

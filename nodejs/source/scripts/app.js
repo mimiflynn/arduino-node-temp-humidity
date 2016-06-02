@@ -1,15 +1,10 @@
 var React = require('react');
 // var render = require('react-dom').render;
 var render = React.render;
-var RecipeApp = require('./recipes/components/RecipeBook');
-var RecipeForm = require('./recipes/components/RecipeForm');
+var Dht = require('./screens/dht/index');
 
 render(
-  <RecipeApp />,
-  document.getElementById('recipe-app')
+  <Dht />,
+  document.getElementById('app')
 );
 
-render(
-  <RecipeForm csrf_token={ window.csrf } />,
-  document.getElementById('recipe-add')
-);

@@ -1,19 +1,18 @@
 var React = require('react');
 
 var DefaultLayout = require('../layouts/default');
-var RecipeList = require('../recipes/recipe-list');
-var RecipeForm = require('../recipes/form');
+var List = require('../dht/list');
 
 module.exports = React.createClass({
-	propTypes: {
-		title: React.PropTypes.string,
+  propTypes: {
+    title: React.PropTypes.string,
     isAuthenticated: React.PropTypes.bool,
     user: React.PropTypes.object,
-		content: React.PropTypes.string,
-		scripts: React.PropTypes.array,
-    recipes: React.PropTypes.array,
+    content: React.PropTypes.string,
+    scripts: React.PropTypes.array,
+    data: React.PropTypes.array,
     csrf_token: React.PropTypes.string
-	},
+  },
   loggedInGreeting: function () {
     return this.props.user.name;
   },
@@ -24,32 +23,22 @@ module.exports = React.createClass({
       </span>
     );
   },
-  renderNewRecipeForm: function () {
-    return (
-      <section>
-        <h2>Add a recipe</h2>
-        <div id="recipe-add">
-          <RecipeForm csrf_token={ this.props.csrf_token } />
-        </div>
-      </section>
-    );
-  },
   render: function () {
     var greeting = this.props.isAuthenticated ? this.loggedInGreeting() : this.guestGreeting();
-    var reactHtml = React.renderToString(<RecipeList recipes={ this.props.recipes } />);
-    var recipes = 'window.recipes = ' + JSON.stringify(this.props.recipes) + '';
+    var reactHtml = React.renderToString(<List data={ this.props.data } />);
+    var data = 'window.data = ' + JSON.stringify(this.props.data) + '';
     var csrf = 'window.csrf = "' + this.props.csrf_token + '"';
     return (
       <DefaultLayout title={ this.props.title } scripts={ this.props.scripts } isAuthenticated={ this.props.isAuthenticated } user={ this.props.user }>
-        <script dangerouslySetInnerHTML={{__html: recipes}} />
+        <script dangerouslySetInnerHTML={{__html: data}} />
         <script dangerouslySetInnerHTML={{__html: csrf}} />
         <section>
-        	<h2>Welcome, { greeting }!</h2>
+          <h2>Welcome, { greeting }!</h2>
         </section>
         <section>
           { this.props.content }
         </section>
-        <section id="recipe-app" dangerouslySetInnerHTML={{__html: reactHtml}} />
+        <section id="app" dangerouslySetInnerHTML={{__html: reactHtml}} />
         { (this.props.isAuthenticated) ? this.renderNewRecipeForm() : ''}
       </DefaultLayout>
     );

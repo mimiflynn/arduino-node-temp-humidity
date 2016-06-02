@@ -1,4 +1,3 @@
-
 /**
  * Module dependencies.
  */
@@ -40,8 +39,7 @@ module.exports = function (app, passport) {
   app.get('/dht/:id/edit', dhtAuth, dht.edit);
 
   app.get('/api/dht', dht.all);
-  app.post('/api/dht', auth.requiresLogin, dht.create);
-  app.put('/api/dht/:id', dhtAuth, dht.update);
+  app.post('/api/dht', dht.create);
   app.delete('/api/dht/:id', dhtAuth, dht.destroy);
 
   // comment routes

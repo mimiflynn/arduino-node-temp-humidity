@@ -40,3 +40,9 @@ require('./config/routes')(app, passport);
 
 app.listen(port);
 console.log('Express app started on port ' + port);
+
+// attempt to hackily add data to the things
+var arduino = require('./arduino/data');
+
+arduino();
+

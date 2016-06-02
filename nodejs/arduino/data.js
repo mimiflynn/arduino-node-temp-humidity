@@ -1,10 +1,12 @@
 const serialport = require('serialport');
 const SerialPort = serialport.SerialPort;
 const parsers = serialport.parsers;
-const _ = require('underscore');
-const io = require('socket.io')();
+const _ = require('lodash');
 
-const arduino = new SerialPort('/dev/cu.usbmodem1421', {
+// attempt to hackily add data to the things
+var dht = require('../server/controllers/dht');
+
+const arduino = new SerialPort('/dev/cu.usbmodem1411', {
   baudrate: 9600,
   parser: parsers.readline('\r\n')
 });
@@ -19,12 +21,16 @@ const getArduinoPort = () => {
   return com;
 };
 
-arduino.on('open', () => {
-  console.log('Port Open');
-});
+// returns dht data json
+const getData = () => {
+  arduino.on('open', () => {
+    console.log('Port Open');
+  });
 
-arduino.on('data', (data) => {
-  console.log(data);
-  io.emit(data);
-});
+  arduino.on('data', (data) => {
+    console.log(data);
+    dht.create({body: JSON.parse(data)});
+  });
+}
 
+module.exports = getData;
