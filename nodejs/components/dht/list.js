@@ -1,30 +1,28 @@
 var React = require('react');
 
-var DefaultLayout = require('../layouts/default');
-
-var Recipe = require('./recipe');
+var Item = require('./item');
 
 module.exports = React.createClass({
   propTypes: {
     title: React.PropTypes.string,
     isAuthenticated: React.PropTypes.bool,
-    recipes: React.PropTypes.array,
+    data: React.PropTypes.array,
     page: React.PropTypes.number,
     pages: React.PropTypes.number
   },
   render: function () {
-    var recipes = this.props.recipes.map(function (item, index) {
+    var items = this.props.data.map(function (item, index) {
       return (
         <li className="list-group-item" key={ item._id }>
-          <h2><a href={ '/recipes/' + item._id }>{ item.title }</a></h2>
-          <Recipe recipe={ item } />
+          <Item data={ item } />
         </li>
       );
     });
     return (
       <ul className="list-group">
-        { recipes }
+        { items }
       </ul>
     );
   }
 });
+

@@ -31,7 +31,7 @@ module.exports = React.createClass({
       <nav className="navbar navbar-inverse navbar-fixed-top">
         <div className="container-fluid">
           <div className="logo pull-left">
-            <a className="navbar-brand" href="/">Recipes</a>
+            <a className="navbar-brand" href="/">Sky Shack Atmospheric Monitor</a>
           </div>
           <Menu items={ (this.props.isAuthenticated) ? userMenu : guestMenu } />
         </div>

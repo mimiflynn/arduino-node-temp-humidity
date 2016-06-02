@@ -77,7 +77,7 @@ exports.index = function (req, res){
       res.render('dht/index', {
         title: 'dht',
         isAuthenticated: req.isAuthenticated(),
-        dht: dht,
+        data: dht,
         page: page + 1,
         pages: Math.ceil(count / perPage)
       });

@@ -1,41 +1,42 @@
 var React = require('react');
 
-var RecipesStore = require('../stores/recipe-store.js');
+var Store = require('../stores/store.js');
 var ViewActionCreators = require('../actions/ViewActionCreators');
 
-var RecipeList = require('../../../../components/recipes/list');
+var List = require('../../../../components/dht/list');
 
 module.exports = React.createClass({
   getInitialState: function () {
-    return RecipesStore.getState();
+    return Store.getState();
   },
 
   componentDidMount: function () {
-    RecipesStore.addChangeListener(this.handleStoreChange);
-    ViewActionCreators.loadRecipes();
+    Store.addChangeListener(this.handleStoreChange);
+    ViewActionCreators.loads();
   },
 
   componentWillUnmount: function () {
-    RecipesStore.removeChangeListener(this.handleStoreChange);
+    Store.removeChangeListener(this.handleStoreChange);
   },
 
   handleStoreChange: function () {
-    this.setState(RecipesStore.getState());
+    this.setState(Store.getState());
   },
 
-  deleteRecipe: function (recipe) {
-    ViewActionCreators.deleteRecipe(recipe);
+  delete: function (data) {
+    ViewActionCreators.delete(data);
   },
 
   render: function () {
-    if (this.state.recipes.loaded) {
+    if (this.state.data.loaded) {
       return (
-        <RecipeList recipes={this.state.recipes} />
+        <List data={this.state.data} />
       );
     } else {
       return (
-        <RecipeList recipes={window.recipes} />
+        <List data={window.data} />
       );
     }
   }
 });
+

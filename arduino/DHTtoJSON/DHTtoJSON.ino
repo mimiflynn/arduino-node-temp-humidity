@@ -59,7 +59,7 @@ void loop() {
   root["fahrenheit"] = f;
   root["hic"] = hic;
   root["hif"] = hif;
-  
+
   root.printTo(Serial);
 
   Serial.println();
