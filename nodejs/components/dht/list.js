@@ -13,7 +13,7 @@ module.exports = React.createClass({
   render: function () {
     var items = this.props.data.map(function (item, index) {
       return (
-        <li className="list-group-item" key={ item._id }>
+        <li className="list-group-item" key={ 'dht-' + index }>
           <Item data={ item } />
         </li>
       );
