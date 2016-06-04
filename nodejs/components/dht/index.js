@@ -1,4 +1,5 @@
 var React = require('react');
+var Chart = require('react-d3-core').Chart;
 var LineChart = require('react-d3-basic').LineChart;
 
 var DefaultLayout = require('../layouts/default');
@@ -8,22 +9,12 @@ var List = require('./list');
 var chartSeries = [
   {
     field: 'hif',
-    name: 'Dew Point in F',
-    color: '#ff7f0e',
-    style: {
-      "strokeWidth": 2,
-      "strokeOpacity": .2,
-      "fillOpacity": .2
-    }
+    name: 'Dew Point',
+    color: '#ff0000'
   }, {
     field: 'fahrenheit',
-    name: 'Temp in F',
-    color: '#000099',
-    style: {
-      "strokeWidth": 2,
-      "strokeOpacity": .2,
-      "fillOpacity": .2
-    }
+    name: 'Temp',
+    color: '#0000ff'
   }
 ];
 
@@ -31,6 +22,7 @@ var x = function(d) {
   return d.index;
 }
 
+var margins = {left: 100, right: 100, top: 50, bottom: 50};
 
 module.exports = React.createClass({
   propTypes: {
@@ -42,13 +34,21 @@ module.exports = React.createClass({
   render: function () {
     return (
       <DefaultLayout title={ this.props.title } user={ this.props.user } isAuthenticated={ this.props.isAuthenticated }>
-        <LineChart
-          width= { 900 }
-          height= { 300 }
-          data= { this.props.data }
-          chartSeries= { chartSeries }
-          x= { x }
-        />
+        <Chart
+          title="Title of Chart"
+          width={ 900 }
+          height={ 300 }
+          margins={ margins }
+          >
+          <LineChart
+            width={ 900 }
+            height={ 300 }
+            margins={ margins }
+            data={ this.props.data }
+            chartSeries={ chartSeries }
+            x={ x }
+          />
+        </Chart>
         <List data={ this.props.data } />
       </DefaultLayout>
     );

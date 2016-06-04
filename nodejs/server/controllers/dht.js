@@ -75,7 +75,7 @@ exports.index = function (req, res){
     if (err) return res.render('500');
     Dht.count().exec(function (err, count) {
       res.render('dht/index', {
-        title: 'dht',
+        title: 'Sky Shack Atmospheric Monitor',
         isAuthenticated: req.isAuthenticated(),
         data: dht,
         page: page + 1,
