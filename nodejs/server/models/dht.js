@@ -21,11 +21,11 @@ var Schema = mongoose.Schema;
  */
 
 var DhtSchema = new Schema({
-  humidity: {type : String, default : '', trim : true},
-  celsius: {type : String, default : '', trim : true},
-  fahrenheit: {type : String, default : '', trim : true},
-  hic: {type : String, default : '', trim : true},
-  hif: {type : String, default : '', trim : true},
+  humidity: {type : Number, default : '', trim : true},
+  celsius: {type : Number, default : '', trim : true},
+  fahrenheit: {type : Number, default : '', trim : true},
+  hic: {type : Number, default : '', trim : true},
+  hif: {type : Number, default : '', trim : true},
   date : {type : Date, default : Date.now}
 });
 
@@ -68,3 +68,4 @@ DhtSchema.statics = {
 }
 
 mongoose.model('Dht', DhtSchema);
+

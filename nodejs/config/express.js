@@ -35,7 +35,7 @@ module.exports = function (app, passport) {
   }));
 
   // Static files middleware
-  app.use(express.static(config.root + '/client'));
+  app.use(express.static(config.root + '/dist'));
 
   // Use winston on production
   var log;
@@ -63,7 +63,7 @@ module.exports = function (app, passport) {
   }
 
   // set views path, template engine and default layout
-  app.set('views', config.root + '/components');
+  app.set('views', config.root + '/screens');
   app.set('view engine', 'js');
   app.engine('js', require('express-react-views').createEngine());
 

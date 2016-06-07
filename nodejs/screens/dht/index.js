@@ -4,7 +4,7 @@ var LineChart = require('react-d3-basic').LineChart;
 
 var DefaultLayout = require('../layouts/default');
 
-var List = require('./list');
+var List = require('./components/list');
 
 var chartSeries = [
   {
@@ -19,6 +19,8 @@ var chartSeries = [
 ];
 
 var x = function(d) {
+  console.log('d', d);
+  d = Number.parseInt(d);
   return d.index;
 }
 
@@ -26,6 +28,8 @@ var margins = {left: 100, right: 100, top: 50, bottom: 50};
 
 // ToDo - set up isomorphic rendering
 // refer to home.index
+// already rendering from server
+// need to re-render in client with data for chart
 module.exports = React.createClass({
   propTypes: {
     title: React.PropTypes.string,
@@ -56,3 +60,4 @@ module.exports = React.createClass({
     );
   }
 });
+

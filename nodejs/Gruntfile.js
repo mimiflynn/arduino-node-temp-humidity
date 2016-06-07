@@ -3,7 +3,7 @@ module.exports = function (grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     clean: {
-      build: ['client/js/app.js']
+      build: ['dist/js/app.js']
     },
     webpack: {
       build: {
@@ -11,7 +11,7 @@ module.exports = function (grunt) {
         debug: true,
         devtool: '#source-map',
         output: {
-            path: 'client/js/',
+            path: 'dist/js/',
             filename: 'app.js'
         },
         stats: {
