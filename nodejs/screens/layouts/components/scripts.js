@@ -12,11 +12,11 @@ module.exports = React.createClass({
     } else {
       items = this.props.scripts.map(function (item, index) {
         return (
-          <script key={ item } src={ item } />
+          <script key={ item } src={ '/js/' + item } />
         );
       });
     }
-  
+
     return (
       <span>
         { items }

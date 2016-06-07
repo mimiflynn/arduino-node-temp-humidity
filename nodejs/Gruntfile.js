@@ -7,7 +7,7 @@ module.exports = function (grunt) {
     },
     webpack: {
       build: {
-        entry: './source/scripts/app.js',
+        entry: './client/scripts/app.js',
         debug: true,
         devtool: '#source-map',
         output: {
@@ -22,13 +22,13 @@ module.exports = function (grunt) {
         },
         module: {
           loaders: [
-            { test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/ }
+            { test: /\.js$/, loader: 'babel', exclude: __dirname + '/node_modules' }
           ]
         }
       }
     },
     jshint: {
-      files: ['Gruntfile.js', 'source/scripts/**/*.js'],
+      files: ['Gruntfile.js', 'client/scripts/**/*.js'],
       options: {
         globals: {
           console: true
@@ -41,7 +41,7 @@ module.exports = function (grunt) {
         atBegin: true
       },
       dev: {
-        files: ['<%= jshint.files %>', 'source/**/*.js', 'components/**/*.js'],
+        files: ['<%= jshint.files %>', 'client/**/*.js', 'screens/**/*.js'],
         tasks: ['jshint', 'webpack']
       },
     }

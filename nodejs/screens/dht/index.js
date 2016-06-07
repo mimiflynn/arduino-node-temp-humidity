@@ -5,6 +5,10 @@ var DefaultLayout = require('../layouts/default');
 var Graph = require('./components/graph');
 var List = require('./components/list');
 
+var scripts = [
+  'app.js'
+];
+
 // ToDo - set up isomorphic rendering
 // refer to home.index
 // already rendering from server
@@ -17,10 +21,12 @@ module.exports = React.createClass({
     data: React.PropTypes.array
   },
   render: function () {
+    var data = 'window.data = ' + JSON.stringify(this.props.data) + '';
     return (
-      <DefaultLayout title={ this.props.title } user={ this.props.user } isAuthenticated={ this.props.isAuthenticated }>
-        <Graph data={ this.props.data } />
+      <DefaultLayout title={ this.props.title } user={ this.props.user } isAuthenticated={ this.props.isAuthenticated } scripts={ scripts }>
+        <div id="graph" />
         <List data={ this.props.data } />
+        <script dangerouslySetInnerHTML={{__html: data}} />
       </DefaultLayout>
     );
   }
