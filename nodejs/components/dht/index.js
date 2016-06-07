@@ -24,6 +24,8 @@ var x = function(d) {
 
 var margins = {left: 100, right: 100, top: 50, bottom: 50};
 
+// ToDo - set up isomorphic rendering
+// refer to home.index
 module.exports = React.createClass({
   propTypes: {
     title: React.PropTypes.string,

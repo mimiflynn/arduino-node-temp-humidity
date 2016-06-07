@@ -29,7 +29,7 @@ var commentAuth = [auth.requiresLogin, auth.comment.hasAuthorization];
 
 module.exports = function (app, passport) {
 
-  app.get('/', home.index);
+  app.get('/', dht.index);
 
   // dht routes
   app.param('id', dht.load);

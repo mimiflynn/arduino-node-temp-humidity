@@ -1,4 +1,5 @@
 var React = require('react');
+var Dom = require('react-dom/server');
 
 var DefaultLayout = require('../layouts/default');
 var List = require('../dht/list');
@@ -25,7 +26,7 @@ module.exports = React.createClass({
   },
   render: function () {
     var greeting = this.props.isAuthenticated ? this.loggedInGreeting() : this.guestGreeting();
-    var reactHtml = React.renderToString(<List data={ this.props.data } />);
+    var reactHtml = Dom.renderToString(<List data={ this.props.data } />);
     var data = 'window.data = ' + JSON.stringify(this.props.data) + '';
     var csrf = 'window.csrf = "' + this.props.csrf_token + '"';
     return (
