@@ -11,6 +11,7 @@ Will eventually be a browser based interface to view temperature and humidity da
 - DHT22 sensor
 - Arduino IDE
 - [DHT Sensor Library](https://github.com/adafruit/DHT-sensor-library)
+- [ArduionJson Library](https://github.com/bblanchon/ArduinoJson)
 
 ## Credits
 
