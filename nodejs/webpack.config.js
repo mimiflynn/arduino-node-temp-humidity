@@ -13,11 +13,18 @@ module.exports = {
       filename: 'app.js'
   },
   module: {
-//    preLoaders: [
-//      { test: /\.js?/, exclude: __dirname + '/node_modules', loaders: ['eslint'] }
-//    ],
+    preLoaders: [
+      { test: /\.js?/, exclude: __dirname + '/node_modules', loaders: ['eslint'] }
+    ],
     loaders: [
-      { test: /\.(js||jsx)$/, loader: 'babel-loader', exclude: __dirname + '/node_modules' }
+      {
+        test: /\.(js||jsx)$/,
+        loader: 'babel',
+        exclude: __dirname + '/node_modules',
+        query: {
+          presets:['react']
+        }
+      }
     ]
   }
 }

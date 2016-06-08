@@ -14,7 +14,7 @@ var chartSeries = [
   }
 ];
 
-var x = function(d) {
+var x = function (d) {
   console.log('d', d);
   d = Number.parseInt(d);
   return d.index;

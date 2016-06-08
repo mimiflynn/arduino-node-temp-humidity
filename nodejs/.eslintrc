@@ -7,7 +7,6 @@
   plugins: [
     "react"
   ],
-  extends: "airbnb",
   rules: {
     no-console: 0,
     comma-dangle: 0,
