@@ -1,0 +1,26 @@
+{
+  parser: "babel-eslint",
+  env: {
+    browser: true,
+    node: true
+  },
+  plugins: [
+    "react"
+  ],
+  extends: "airbnb",
+  rules: {
+    no-console: 0,
+    comma-dangle: 0,
+    max-len: 0,
+    prefer-template: 0,
+    react/no-multi-comp: 0,
+    react/sort-comp: 0,
+    space-before-function-paren: [
+      2,
+      {
+        anonymous: "always",
+        named: "always"
+      }
+    ]
+  }
+}

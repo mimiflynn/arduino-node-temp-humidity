@@ -1,8 +1,8 @@
 var React = require('react');
-var render = require('react-dom').render;
+var Dom = require('react-dom');
 var Dht = require('./screens/dht/index');
 
-render(
+Dom.render(
   <Dht />,
   document.getElementById('graph')
 );
