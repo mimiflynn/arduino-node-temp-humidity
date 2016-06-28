@@ -6,8 +6,8 @@ const _ = require('lodash');
 // attempt to hackily add data to the things
 var dht = require('../server/controllers/dht');
 
-// var port = '/dev/cu.usbmodem1411';
-var port = '/dev/cu.usbmodemFD1321';
+var port = '/dev/cu.usbmodem1421';
+//var port = '/dev/cu.usbmodemFD1321';
 
 // create config file for this
 const arduino = new SerialPort(port, {
