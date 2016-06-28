@@ -12,8 +12,6 @@ Overall, I started this project in an attempt to collect large amounts of data a
 
 I would like to thank my darling orchid as the true inspiration for this project. Although neglect is highly suggested in regards to orchid care, I've decided to further explore environmental variables to better understand my darling plant.
 
-
-
 ## Requirements
 
 - NodeJS
@@ -22,6 +20,15 @@ I would like to thank my darling orchid as the true inspiration for this project
 - Arduino IDE
 - [DHT Sensor Library](https://github.com/adafruit/DHT-sensor-library)
 - [ArduionJson Library](https://github.com/bblanchon/ArduinoJson)
+
+## Usage
+
+- Hook up Arduino and DHT22 sensor hardware.
+- Load firmware onto Arduino
+- `cd nodejs`
+- `npm install`
+- `npm start` to begin collecting temperature and humidity data and outputting values from the database
+- if no errors in the console, go to `localhost:3000` and view data
 
 ## Credits
 
