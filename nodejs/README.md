@@ -13,6 +13,10 @@
 
 Since this is a mix of a couple things, I have two terminals running watches: one running `npm start` and another running `webpack --watch`.
 
+### D3
+
+At the time of writing, D3 had just released v4 that is not backwards compatible with v3. I used this [handy dandy guide to the API changes](http://denvycom.com/blog/d3-js-version-4-x-examples-and-changes-from-version-3-x/) to make the switch.
+
 # Boilerplate Info
 
 This app was built using the [node express and mongoose boilerplate.](https://github.com/madhums/node-express-mongoose) ([This is an example app using the boilerplate.](https://github.com/madhums/node-express-mongoose-demo)) It was modified to use React templates in the backend and reorganized to share those templates with the frontend.
