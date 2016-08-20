@@ -2,17 +2,17 @@ var ActionTypes = require('../constants/constants').ActionTypes;
 var AppDispatcher = require('../dispatcher/dispatcher');
 
 var ServerActionCreators = {
-  loadedRecipes: function (recipes) {
+  loadedDht: function (dht) {
     AppDispatcher.handleServerAction({
-      type: ActionTypes.RECIPES_LOADED,
-      recipes: recipes
+      type: ActionTypes.DHT_LOADED,
+      dht: dht
     });
   },
 
-  deletedRecipe: function (recipe) {
+  deletedDht: function (dht) {
     AppDispatcher.handleServerAction({
-      type: ActionTypes.RECIPE_DELETED,
-      recipe: recipe
+      type: ActionTypes.DHT_DELETED,
+      dht: dht
     });
   }
 };

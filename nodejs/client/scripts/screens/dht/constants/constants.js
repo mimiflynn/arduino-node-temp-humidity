@@ -1,16 +1,14 @@
-var keyMirror = require('react/lib/keyMirror');
-
 module.exports = {
   API: 'http://localhost:3000/api',
 
-  ActionTypes: keyMirror({
-    RECIPES_LOADED: null,
-    LOAD_RECIPES: null,
-    RECIPE_DELETED: null
-  }),
+  ActionTypes: {
+    DHT_LOADED: 'DHT_LOADED',
+    LOAD_DHT: 'LOAD_DHT',
+    DHT_DELETED: 'DHT_DELETED'
+  },
 
-  PayloadSources: keyMirror({
-    SERVER_ACTION: null,
-    VIEW_ACTION: null
-  })
+  PayloadSources: {
+    SERVER_ACTION: 'SERVER_ACTION',
+    VIEW_ACTION: 'VIEW_ACTION'
+  }
 };

@@ -15,8 +15,6 @@ var chartSeries = [
 ];
 
 var x = function (d) {
-  console.log('d', d);
-  console.log('fahrenheit', d.fahrenheit);
   return d.fahrenheit;
 }
 

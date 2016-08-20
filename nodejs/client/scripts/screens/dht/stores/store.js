@@ -1,22 +1,22 @@
 var AppDispatcher = require('../dispatcher/dispatcher');
 var EventEmitter = require('events').EventEmitter;
 var ActionTypes = require('../constants/constants').ActionTypes;
-var assign = require('react/lib/Object.assign');
+var assign = Object.assign;
 
 var events = new EventEmitter();
 var CHANGE_EVENT = 'CHANGE';
 
 var state = {
-  recipes: [],
+  dht: [],
   loaded: false
 };
 
-function setState(newState) {
+function setState (newState) {
   assign(state, newState);
   events.emit(CHANGE_EVENT);
 }
 
-var RecipesStore = {
+var DhtStore = {
   addChangeListener: function (fn) {
     events.addListener(CHANGE_EVENT, fn);
   },
@@ -30,22 +30,22 @@ var RecipesStore = {
   }
 };
 
-RecipesStore.dispatchToken = AppDispatcher.register(function (payload) {
+DhtStore.dispatchToken = AppDispatcher.register(function (payload) {
   var action = payload.action;
 
-  if (action.type === ActionTypes.RECIPES_LOADED) {
+  if (action.type === ActionTypes.DHT_LOADED) {
     setState({
       loaded: true,
-      recipes: action.recipes
+      dht: action.dht
     });
   }
 
-  if (action.type === ActionTypes.RECIPE_DELETED) {
-    var newRecipes = state.recipes.filter(function (recipe) {
-      return recipe.id !== action.recipe.id;
+  if (action.type === ActionTypes.DHT_DELETED) {
+    var newDht = state.dht.filter(function (dht) {
+      return dht.id !== action.dht.id;
     });
-    setState({ recipes: newRecipes });
+    setState({ dht: newDht });
   }
 });
 
-module.exports = RecipesStore;
+module.exports = DhtStore;

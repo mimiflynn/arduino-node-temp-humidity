@@ -38,7 +38,7 @@ exports.all = function (req, res) {
 
 exports.latest = function (req, res) {
   var page = (req.params.page > 0 ? req.params.page : 1) - 1;
-  var perPage = 30;
+  var perPage = 120;
   var options = {
     perPage: perPage,
     page: page
@@ -62,7 +62,7 @@ exports.latest = function (req, res) {
 
 exports.index = function (req, res){
   var page = (req.params.page > 0 ? req.params.page : 1) - 1;
-  var perPage = 30;
+  var perPage = 120;
   var options = {
     perPage: perPage,
     page: page

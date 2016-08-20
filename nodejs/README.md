@@ -11,6 +11,8 @@
 
 ## Development
 
+Since this is a mix of a couple things, I have two terminals running watches: one running `npm start` and another running `webpack --watch`.
+
 # Boilerplate Info
 
 This app was built using the [node express and mongoose boilerplate.](https://github.com/madhums/node-express-mongoose) ([This is an example app using the boilerplate.](https://github.com/madhums/node-express-mongoose-demo)) It was modified to use React templates in the backend and reorganized to share those templates with the frontend.

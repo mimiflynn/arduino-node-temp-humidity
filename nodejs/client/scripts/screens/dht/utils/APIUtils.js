@@ -1,18 +1,18 @@
-var xhr = require('../../lib/xhr');
+var xhr = require('../../../lib/xhr');
 var API = require('../constants/constants').API;
 var ActionTypes = require('../constants/constants').ActionTypes;
 var ServerActionCreators = require('../actions/ServerActionCreators');
 
 var APIUtils = {
-  loadRecipes: function () {
-    xhr.getJSON(API + '/recipes', function (err, res) {
-      ServerActionCreators.loadedRecipes(res);
+  loadDht: function () {
+    xhr.getJSON(API + '/dht/latest', function (err, res) {
+      ServerActionCreators.loadedDht(res);
     });
   },
 
-  deleteRecipe: function (recipe) {
-    xhr.deleteJSON(API + '/recipes/' + recipe.id, function (err, res) {
-      ServerActionCreators.deletedRecipe(recipe);
+  deleteDht: function (dht) {
+    xhr.deleteJSON(API + '/dht/' + dht.id, function (err, res) {
+      ServerActionCreators.deletedDht(dht);
     });
   }
 };

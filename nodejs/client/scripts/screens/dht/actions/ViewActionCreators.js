@@ -3,19 +3,19 @@ var AppDispatcher = require('../dispatcher/dispatcher');
 var APIUtils = require('../utils/APIUtils');
 
 var ViewActionCreators = {
-  loadRecipes: function () {
+  loadDht: function () {
     AppDispatcher.handleViewAction({
-      type: ActionTypes.LOAD_RECIPES
+      type: ActionTypes.LOAD_DHT
     });
-    APIUtils.loadRecipes();
+    APIUtils.loadDht();
   },
 
-  deleteRecipe: function (recipe) {
+  deleteDht: function (dht) {
     AppDispatcher.handleViewAction({
-      type: ActionTypes.RECIPE_DELETED,
-      recipe: recipe
+      type: ActionTypes.DHT_DELETED,
+      dht: dht
     });
-    APIUtils.deleteRecipe(recipe);
+    APIUtils.deleteDht(dht);
   }
 };
 
