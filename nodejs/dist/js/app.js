@@ -159,6 +159,11 @@
 	// shim for using process in browser
 	
 	var process = module.exports = {};
+	
+	// cached from whatever global is present so that test runners that stub it don't break things.
+	var cachedSetTimeout = setTimeout;
+	var cachedClearTimeout = clearTimeout;
+	
 	var queue = [];
 	var draining = false;
 	var currentQueue;
@@ -183,7 +188,7 @@
 	    if (draining) {
 	        return;
 	    }
-	    var timeout = setTimeout(cleanUpNextTick);
+	    var timeout = cachedSetTimeout(cleanUpNextTick);
 	    draining = true;
 	
 	    var len = queue.length;
@@ -200,7 +205,7 @@
 	    }
 	    currentQueue = null;
 	    draining = false;
-	    clearTimeout(timeout);
+	    cachedClearTimeout(timeout);
 	}
 	
 	process.nextTick = function (fun) {
@@ -212,7 +217,7 @@
 	    }
 	    queue.push(new Item(fun, args));
 	    if (queue.length === 1 && !draining) {
-	        setTimeout(drainQueue, 0);
+	        cachedSetTimeout(drainQueue, 0);
 	    }
 	};
 	
@@ -20354,8 +20359,8 @@
 	
 	var x = function (d) {
 	  console.log('d', d);
-	  d = Number.parseInt(d);
-	  return d.index;
+	  console.log('fahrenheit', d.fahrenheit);
+	  return d.fahrenheit;
 	};
 	
 	var margins = { left: 100, right: 100, top: 50, bottom: 50 };
@@ -20364,8 +20369,8 @@
 	// refer to home.index
 	// already rendering from server
 	// need to re-render in client with data for chart
-	module.exports = React.createClass({
-	  displayName: 'exports',
+	var reactD3 = React.createClass({
+	  displayName: 'reactD3',
 	
 	  propTypes: {
 	    data: React.PropTypes.array
@@ -20390,6 +20395,8 @@
 	    );
 	  }
 	});
+	
+	module.exports = reactD3;
 
 /***/ },
 /* 170 */
@@ -42853,12 +42860,13 @@
 	      return _react2.default.createElement(
 	        'g',
 	        null,
-	        dataset.map(function (area) {
+	        dataset.map(function (area, i) {
 	          return _react2.default.createElement('path', {
 	            className: areaClassName + ' area',
 	            fill: area.color,
 	            d: that._setAxes(area.data),
-	            style: area.style
+	            style: area.style,
+	            key: i
 	          });
 	        })
 	      );
@@ -43096,6 +43104,11 @@
 	      this.props.onMouseOut(e, data);
 	    }
 	  }, {
+	    key: 'triggerClick',
+	    value: function triggerClick(data, e) {
+	      this.props.onClick(e, data);
+	    }
+	  }, {
 	    key: '_mkBar',
 	    value: function _mkBar() {
 	      var _this2 = this;
@@ -43125,7 +43138,7 @@
 	      return _react2.default.createElement(
 	        'g',
 	        null,
-	        dataset.data.map(function (bar) {
+	        dataset.data.map(function (bar, i) {
 	          return _react2.default.createElement('rect', {
 	            className: barClassName + ' bar',
 	            x: xScaleSet(bar.x) || xScaleSet(bar.x) === 0 ? xScaleSet(bar.x) : -10000,
@@ -43135,7 +43148,9 @@
 	            fill: bar._style.color ? bar._style.color : dataset.color,
 	            style: Object.assign({}, dataset.style, bar._style),
 	            onMouseOut: that.triggerOut.bind(_this2, bar),
-	            onMouseOver: that.triggerOver.bind(_this2, bar)
+	            onMouseOver: that.triggerOver.bind(_this2, bar),
+	            onClick: that.triggerClick.bind(_this2, bar),
+	            key: i
 	          });
 	        })
 	      );
@@ -43159,6 +43174,7 @@
 	Bar.defaultProps = {
 	  onMouseOver: function onMouseOver(d) {},
 	  onMouseOut: function onMouseOut(d) {},
+	  onClick: function onClick(d) {},
 	  barClassName: 'react-d3-basic__bar'
 	};
 	exports.default = Bar;
@@ -43237,7 +43253,7 @@
 	      return _react2.default.createElement(
 	        'g',
 	        null,
-	        dataset.data.map(function (bar) {
+	        dataset.data.map(function (bar, i) {
 	          return _react2.default.createElement('rect', {
 	            className: barClassName + ' bar',
 	            y: yScaleSet(bar.y) || yScaleSet(bar.y) === 0 ? yScaleSet(bar.y) : -10000,
@@ -43247,7 +43263,8 @@
 	            fill: bar._style.color ? bar._style.color : dataset.color,
 	            style: Object.assign({}, dataset.style, bar._style),
 	            onMouseOut: that.triggerOut.bind(_this2, bar),
-	            onMouseOver: that.triggerOver.bind(_this2, bar)
+	            onMouseOver: that.triggerOver.bind(_this2, bar),
+	            key: i
 	          });
 	        })
 	      );
@@ -43360,9 +43377,10 @@
 	      return dataset.map(function (barGroup, i) {
 	        return _react2.default.createElement(
 	          'g',
-	          { className: 'bargroup' },
-	          barGroup.data.map(function (bar) {
+	          { className: 'bargroup', key: i },
+	          barGroup.data.map(function (bar, j) {
 	            return _react2.default.createElement('rect', {
+	              key: j,
 	              className: barClassName + ' bar',
 	              width: x1.bandwidth(),
 	              x: xScaleSet(bar.x) || xScaleSet(bar.x) === 0 ? xScaleSet(bar.x) + x1.bandwidth() * i : -10000,
@@ -43490,8 +43508,8 @@
 	        dataset.map(function (barGroup, i) {
 	          return _react2.default.createElement(
 	            'g',
-	            { className: 'bargroup' },
-	            barGroup.data.map(function (bar) {
+	            { className: 'bargroup', key: i },
+	            barGroup.data.map(function (bar, j) {
 	              return _react2.default.createElement('rect', {
 	                className: barClassName + ' bar',
 	                height: y1.bandwidth(),
@@ -43501,7 +43519,8 @@
 	                fill: barGroup.color,
 	                onMouseOut: that.triggerOut.bind(_this2, bar),
 	                onMouseOver: that.triggerOver.bind(_this2, bar),
-	                style: barGroup.style
+	                style: barGroup.style,
+	                key: j
 	              });
 	            })
 	          );
@@ -43616,14 +43635,15 @@
 	      return _react2.default.createElement(
 	        'g',
 	        null,
-	        _setStack(dataset).map(function (barGroup) {
+	        _setStack(dataset).map(function (barGroup, i) {
 	          return _react2.default.createElement(
 	            'g',
 	            {
+	              key: i,
 	              className: 'barGroup',
 	              fill: barGroup.color,
 	              style: barGroup.style },
-	            barGroup.data.map(function (bar) {
+	            barGroup.data.map(function (bar, j) {
 	              return _react2.default.createElement('rect', {
 	                className: barClassName + ' bar',
 	                width: xScaleSet.bandwidth(),
@@ -43632,7 +43652,8 @@
 	                height: Math.abs(yScaleSet(bar.y) - yScaleSet(0)),
 	                onMouseOut: that.triggerOut.bind(_this2, bar),
 	                onMouseOver: that.triggerOver.bind(_this2, bar),
-	                onClick: that.triggerClick.bind(_this2, bar)
+	                onClick: that.triggerClick.bind(_this2, bar),
+	                key: j
 	              });
 	            })
 	          );
@@ -43777,15 +43798,16 @@
 	      return _react2.default.createElement(
 	        'g',
 	        null,
-	        _setStack(dataset).map(function (barGroup) {
+	        _setStack(dataset).map(function (barGroup, i) {
 	          return _react2.default.createElement(
 	            'g',
 	            {
 	              className: 'barGroup',
 	              fill: barGroup.color,
-	              style: barGroup.style
+	              style: barGroup.style,
+	              key: i
 	            },
-	            barGroup.data.map(function (bar) {
+	            barGroup.data.map(function (bar, j) {
 	              return _react2.default.createElement('rect', {
 	                className: barClassName + ' bar',
 	                height: yScaleSet.bandwidth(),
@@ -43793,7 +43815,8 @@
 	                x: xScaleSet(bar.x0),
 	                width: Math.abs(xScaleSet(bar.x) - xScaleSet(0)),
 	                onMouseOut: that.triggerOut.bind(_this2, bar),
-	                onMouseOver: that.triggerOver.bind(_this2, bar)
+	                onMouseOver: that.triggerOver.bind(_this2, bar),
+	                key: j
 	              });
 	            })
 	          );

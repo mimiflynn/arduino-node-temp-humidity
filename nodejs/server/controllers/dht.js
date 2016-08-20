@@ -36,26 +36,23 @@ exports.all = function (req, res) {
   });
 };
 
-/**
- * Create an dht
- */
+exports.latest = function (req, res) {
+  var page = (req.params.page > 0 ? req.params.page : 1) - 1;
+  var perPage = 30;
+  var options = {
+    perPage: perPage,
+    page: page
+  };
 
-exports.create = function (req, res) {
-  var dht = new Dht(req.body);
-  dht.save((err) => {
-    console.error(err);
-  });
-};
-
-/**
- * Delete an dht
- */
-
-exports.destroy = function (req, res){
-  var dht = req.dht;
-  dht.remove(function (err){
-    req.flash('info', 'Deleted successfully');
-    res.redirect('/dht');
+  Dht.list(options, function (err, dht) {
+    if (err) {
+      return res.status(500).json({
+        error: 'Cannot list the dht'
+      });
+    }
+    Dht.find().limit(perPage).sort('-created').exec(function (err, dht) {
+      res.jsonp(dht);
+    });
   });
 };
 
@@ -73,7 +70,7 @@ exports.index = function (req, res){
 
   Dht.list(options, function (err, dht) {
     if (err) return res.render('500');
-    Dht.find().sort({_id:1}).exec(function(err, count) {
+    Dht.find().limit(perPage).sort({_id:1}).exec(function(err, count) {
       res.render('dht/index', {
         title: 'Sky Shack Atmospheric Monitor',
         isAuthenticated: req.isAuthenticated(),
@@ -85,6 +82,12 @@ exports.index = function (req, res){
   });
 };
 
+
+
+/**
+ * ----------- crud ----------- *
+ */
+
 /**
  * New dht
  */
@@ -94,6 +97,17 @@ exports.new = function (req, res){
     title: 'New dht',
     isAuthenticated: req.isAuthenticated(),
     dht: new dht({})
+  });
+};
+
+/**
+ * Create an dht
+ */
+
+exports.create = function (req, res) {
+  var dht = new Dht(req.body);
+  dht.save((err) => {
+    console.error(err);
   });
 };
 
@@ -109,6 +123,17 @@ exports.edit = function (req, res) {
   });
 };
 
+/**
+ * Delete an dht
+ */
+
+exports.destroy = function (req, res){
+  var dht = req.dht;
+  dht.remove(function (err){
+    req.flash('info', 'Deleted successfully');
+    res.redirect('/dht');
+  });
+};
 
 /**
  * Show

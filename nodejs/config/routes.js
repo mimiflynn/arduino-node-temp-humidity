@@ -39,6 +39,7 @@ module.exports = function (app, passport) {
   app.get('/dht/:id/edit', dhtAuth, dht.edit);
 
   app.get('/api/dht', dht.all);
+  app.get('/api/dht/latest', dht.latest);
   app.post('/api/dht', dht.create);
   app.delete('/api/dht/:id', dhtAuth, dht.destroy);
 

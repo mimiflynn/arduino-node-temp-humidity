@@ -16,8 +16,8 @@ var chartSeries = [
 
 var x = function (d) {
   console.log('d', d);
-  d = Number.parseInt(d);
-  return d.index;
+  console.log('fahrenheit', d.fahrenheit);
+  return d.fahrenheit;
 }
 
 var margins = {left: 100, right: 100, top: 50, bottom: 50};
@@ -26,7 +26,7 @@ var margins = {left: 100, right: 100, top: 50, bottom: 50};
 // refer to home.index
 // already rendering from server
 // need to re-render in client with data for chart
-module.exports = React.createClass({
+var reactD3 = React.createClass({
   propTypes: {
     data: React.PropTypes.array
   },
@@ -51,3 +51,4 @@ module.exports = React.createClass({
   }
 });
 
+module.exports = reactD3;
