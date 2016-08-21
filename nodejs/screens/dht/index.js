@@ -25,7 +25,7 @@ module.exports = React.createClass({
     return (
       <DefaultLayout title={ this.props.title } user={ this.props.user } isAuthenticated={ this.props.isAuthenticated } scripts={ scripts }>
         <div id="graph" />
-        <svg id="visualisation" width="1000" height="500"></svg>
+        <svg id="visualisation" width="1000" height="500" xmlns="http://www.w3.org/2000/svg" version="1.1"></svg>
         <List data={ this.props.data } />
         <script dangerouslySetInnerHTML={{__html: data}} />
       </DefaultLayout>
