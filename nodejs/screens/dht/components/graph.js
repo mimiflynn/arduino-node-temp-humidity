@@ -1,13 +1,12 @@
 var React = require('react');
 var d3 = require('d3');
-var moment = require('moment');
 
 function InitChart (dht) {
 
   // Get time range from data
   // assuming data is sorted in decending order
 
-  var timeDomain = [new Date(dht[0].date), new Date(dht[119].date)];
+  var timeDomain = [new Date(dht[119].date), new Date(dht[0].date)];
 
   var vis = d3.select("#visualisation"),
       WIDTH = 1000,
@@ -21,7 +20,7 @@ function InitChart (dht) {
 
       xScale = d3.scaleTime().range([MARGINS.left, WIDTH - MARGINS.right]).domain(timeDomain),
 
-      yScale = d3.scaleLinear().range([HEIGHT - MARGINS.top, MARGINS.bottom]).domain([65, 100]),
+      yScale = d3.scaleLinear().range([HEIGHT - MARGINS.top, MARGINS.bottom]).domain([65, 85]),
 
       xAxis = d3.axisBottom()
       .scale(xScale),
