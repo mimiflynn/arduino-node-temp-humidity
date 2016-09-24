@@ -1,13 +1,12 @@
 var mongoose = require('mongoose');
 var Dht = mongoose.model('Dht');
 var utils = require('../../lib/utils');
-var extend = require('util')._extend;
 
 /**
  * Load
  */
 
-exports.load = function (req, res, next, id){
+exports.load = (req, res, next, id) => {
   Dht.load(id, function (err, dht) {
     if (err) return next(err);
     if (!dht) return next(new Error('not found'));
@@ -25,7 +24,7 @@ exports.load = function (req, res, next, id){
  * Return all dht
  */
 
-exports.all = function (req, res) {
+exports.all = (req, res) => {
   Dht.find().sort('-created').exec(function (err, dht) {
     if (err) {
       return res.status(500).json({
@@ -36,7 +35,7 @@ exports.all = function (req, res) {
   });
 };
 
-exports.latest = function (req, res) {
+exports.latest = (req, res) => {
   var page = (req.params.page > 0 ? req.params.page : 1) - 1;
   var perPage = 120;
   var options = {
@@ -44,13 +43,13 @@ exports.latest = function (req, res) {
     page: page
   };
 
-  Dht.list(options, function (err, dht) {
+  Dht.list(options, (err, dht) => {
     if (err) {
       return res.status(500).json({
         error: 'Cannot list the dht'
       });
     }
-    Dht.find().limit(perPage).sort('-created').exec(function (err, dht) {
+    Dht.find().limit(perPage).sort('-created').exec((err, dht) => {
       res.jsonp(dht);
     });
   });
@@ -60,7 +59,7 @@ exports.latest = function (req, res) {
  * ----------- Server side pages ----------- *
  */
 
-exports.index = function (req, res){
+exports.index = (req, res) => {
   var page = (req.params.page > 0 ? req.params.page : 1) - 1;
   var perPage = 120;
   var options = {
@@ -68,9 +67,9 @@ exports.index = function (req, res){
     page: page
   };
 
-  Dht.list(options, function (err, dht) {
+  Dht.list(options, (err, dht) => {
     if (err) return res.render('500');
-    Dht.find().limit(perPage).sort({_id:1}).exec(function(err, count) {
+    Dht.find().limit(perPage).sort({_id:1}).exec((err, count) => {
       res.render('dht/index', {
         title: 'Sky Shack Atmospheric Monitor',
         isAuthenticated: req.isAuthenticated(),
@@ -92,7 +91,7 @@ exports.index = function (req, res){
  * New dht
  */
 
-exports.new = function (req, res){
+exports.new = (req, res) =>{
   res.render('dht/new', {
     title: 'New dht',
     isAuthenticated: req.isAuthenticated(),
@@ -104,7 +103,7 @@ exports.new = function (req, res){
  * Create an dht
  */
 
-exports.create = function (req, res) {
+exports.create = (req, res) => {
   var dht = new Dht(req.body);
   dht.save((err) => {
     console.error(err);
@@ -115,7 +114,7 @@ exports.create = function (req, res) {
  * Edit an dht
  */
 
-exports.edit = function (req, res) {
+exports.edit = (req, res) => {
   res.render('dht/edit', {
     title: 'Edit ' + req.dht.title,
     isAuthenticated: req.isAuthenticated(),
@@ -127,9 +126,9 @@ exports.edit = function (req, res) {
  * Delete an dht
  */
 
-exports.destroy = function (req, res){
+exports.destroy = (req, res) => {
   var dht = req.dht;
-  dht.remove(function (err){
+  dht.remove((err) => {
     req.flash('info', 'Deleted successfully');
     res.redirect('/dht');
   });
@@ -139,7 +138,7 @@ exports.destroy = function (req, res){
  * Show
  */
 
-exports.show = function (req, res){
+exports.show = (req, res) => {
   res.render('dht/show', {
     title: req.dht.title,
     isAuthenticated: req.isAuthenticated(),

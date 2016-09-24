@@ -1,16 +1,15 @@
-var xhr = require('../../../lib/xhr');
-var API = require('../constants/constants').API;
-var ActionTypes = require('../constants/constants').ActionTypes;
-var ServerActionCreators = require('../actions/ServerActionCreators');
+import xhr from '../../../lib/xhr';
+import { API, ActionTypes } from '../constants/constants';
+import ServerActionCreators from '../actions/ServerActionCreators';
 
 var APIUtils = {
-  loadDht: function () {
+  loadDht: () => {
     xhr.getJSON(API + '/dht/latest', function (err, res) {
       ServerActionCreators.loadedDht(res);
     });
   },
 
-  deleteDht: function (dht) {
+  deleteDht: (dht) => {
     xhr.deleteJSON(API + '/dht/' + dht.id, function (err, res) {
       ServerActionCreators.deletedDht(dht);
     });

@@ -46,11 +46,19 @@
 
 	'use strict';
 	
-	var React = __webpack_require__(1);
-	var render = __webpack_require__(38).render;
-	var Dht = __webpack_require__(168);
+	var _react = __webpack_require__(1);
 	
-	render(React.createElement(Dht, null), document.getElementById('graph'));
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactDom = __webpack_require__(38);
+	
+	var _index = __webpack_require__(168);
+	
+	var _index2 = _interopRequireDefault(_index);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	(0, _reactDom.render)(_react2.default.createElement(_index2.default, null), document.getElementById('graph'));
 
 /***/ },
 /* 1 */
@@ -21115,21 +21123,28 @@
 
 	'use strict';
 	
-	var xhr = __webpack_require__(178);
-	var API = __webpack_require__(174).API;
-	var ActionTypes = __webpack_require__(174).ActionTypes;
-	var ServerActionCreators = __webpack_require__(179);
+	var _xhr = __webpack_require__(178);
+	
+	var _xhr2 = _interopRequireDefault(_xhr);
+	
+	var _constants = __webpack_require__(174);
+	
+	var _ServerActionCreators = __webpack_require__(179);
+	
+	var _ServerActionCreators2 = _interopRequireDefault(_ServerActionCreators);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var APIUtils = {
 	  loadDht: function loadDht() {
-	    xhr.getJSON(API + '/dht/latest', function (err, res) {
-	      ServerActionCreators.loadedDht(res);
+	    _xhr2.default.getJSON(_constants.API + '/dht/latest', function (err, res) {
+	      _ServerActionCreators2.default.loadedDht(res);
 	    });
 	  },
 	
 	  deleteDht: function deleteDht(dht) {
-	    xhr.deleteJSON(API + '/dht/' + dht.id, function (err, res) {
-	      ServerActionCreators.deletedDht(dht);
+	    _xhr2.default.deleteJSON(_constants.API + '/dht/' + dht.id, function (err, res) {
+	      _ServerActionCreators2.default.deletedDht(dht);
 	    });
 	  }
 	};
@@ -21144,11 +21159,11 @@
 	
 	localStorage.token = localStorage.token || Date.now() * Math.random();
 	
-	var setToken = function setToken(req) {
+	function setToken(req) {
 	  req.setRequestHeader('authorization', localStorage.token);
-	};
+	}
 	
-	var getJSON = function getJSON(url, cb) {
+	function getJSON(url, cb) {
 	  var req = new XMLHttpRequest();
 	  req.onload = function () {
 	    if (req.status === 404) {
@@ -21160,9 +21175,9 @@
 	  req.open('GET', url);
 	  setToken(req);
 	  req.send();
-	};
+	}
 	
-	var postJSON = function postJSON(url, obj, cb) {
+	function postJSON(url, obj, cb) {
 	  var req = new XMLHttpRequest();
 	  req.onload = function () {
 	    cb(JSON.parse(req.response));
@@ -21171,15 +21186,15 @@
 	  req.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
 	  setToken(req);
 	  req.send(JSON.stringify(obj));
-	};
+	}
 	
-	var deleteJSON = function deleteJSON(url, cb) {
+	function deleteJSON(url, cb) {
 	  var req = new XMLHttpRequest();
 	  req.onload = cb;
 	  req.open('DELETE', url);
 	  setToken(req);
 	  req.send();
-	};
+	}
 	
 	module.exports = {
 	  getJSON: getJSON,
