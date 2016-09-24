@@ -1,12 +1,12 @@
 localStorage.token = localStorage.token || (Date.now() * Math.random());
 
-const setToken = (req) => {
+const setToken = function (req) {
   req.setRequestHeader('authorization', localStorage.token);
 };
 
-const getJSON = (url, cb) => {
+const getJSON = function (url, cb) {
   const req = new XMLHttpRequest();
-  req.onload = () => {
+  req.onload = function () {
     if (req.status === 404) {
       cb(new Error('not found'));
     } else {
@@ -18,9 +18,9 @@ const getJSON = (url, cb) => {
   req.send();
 };
 
-const postJSON = (url, obj, cb) => {
+const postJSON = function (url, obj, cb) {
   const req = new XMLHttpRequest();
-  req.onload = () => {
+  req.onload = function () {
     cb(JSON.parse(req.response));
   };
   req.open('POST', url);
@@ -29,7 +29,7 @@ const postJSON = (url, obj, cb) => {
   req.send(JSON.stringify(obj));
 };
 
-const deleteJSON = (url, cb) => {
+const deleteJSON = function (url, cb) {
   const req = new XMLHttpRequest();
   req.onload = cb;
   req.open('DELETE', url);

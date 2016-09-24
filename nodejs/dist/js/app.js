@@ -21127,13 +21127,13 @@
 
 	localStorage.token = localStorage.token || Date.now() * Math.random();
 	
-	const setToken = req => {
+	const setToken = function (req) {
 	  req.setRequestHeader('authorization', localStorage.token);
 	};
 	
-	const getJSON = (url, cb) => {
+	const getJSON = function (url, cb) {
 	  const req = new XMLHttpRequest();
-	  req.onload = () => {
+	  req.onload = function () {
 	    if (req.status === 404) {
 	      cb(new Error('not found'));
 	    } else {
@@ -21145,9 +21145,9 @@
 	  req.send();
 	};
 	
-	const postJSON = (url, obj, cb) => {
+	const postJSON = function (url, obj, cb) {
 	  const req = new XMLHttpRequest();
-	  req.onload = () => {
+	  req.onload = function () {
 	    cb(JSON.parse(req.response));
 	  };
 	  req.open('POST', url);
@@ -21156,7 +21156,7 @@
 	  req.send(JSON.stringify(obj));
 	};
 	
-	const deleteJSON = (url, cb) => {
+	const deleteJSON = function (url, cb) {
 	  const req = new XMLHttpRequest();
 	  req.onload = cb;
 	  req.open('DELETE', url);
@@ -21200,7 +21200,7 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	var React = __webpack_require__(1);
-	var d3 = __webpack_require__(255);
+	var d3 = __webpack_require__(181);
 	
 	function InitChart(dht) {
 	
@@ -21258,81 +21258,7 @@
 	module.exports = chartD3;
 
 /***/ },
-/* 181 */,
-/* 182 */,
-/* 183 */,
-/* 184 */,
-/* 185 */,
-/* 186 */,
-/* 187 */,
-/* 188 */,
-/* 189 */,
-/* 190 */,
-/* 191 */,
-/* 192 */,
-/* 193 */,
-/* 194 */,
-/* 195 */,
-/* 196 */,
-/* 197 */,
-/* 198 */,
-/* 199 */,
-/* 200 */,
-/* 201 */,
-/* 202 */,
-/* 203 */,
-/* 204 */,
-/* 205 */,
-/* 206 */,
-/* 207 */,
-/* 208 */,
-/* 209 */,
-/* 210 */,
-/* 211 */,
-/* 212 */,
-/* 213 */,
-/* 214 */,
-/* 215 */,
-/* 216 */,
-/* 217 */,
-/* 218 */,
-/* 219 */,
-/* 220 */,
-/* 221 */,
-/* 222 */,
-/* 223 */,
-/* 224 */,
-/* 225 */,
-/* 226 */,
-/* 227 */,
-/* 228 */,
-/* 229 */,
-/* 230 */,
-/* 231 */,
-/* 232 */,
-/* 233 */,
-/* 234 */,
-/* 235 */,
-/* 236 */,
-/* 237 */,
-/* 238 */,
-/* 239 */,
-/* 240 */,
-/* 241 */,
-/* 242 */,
-/* 243 */,
-/* 244 */,
-/* 245 */,
-/* 246 */,
-/* 247 */,
-/* 248 */,
-/* 249 */,
-/* 250 */,
-/* 251 */,
-/* 252 */,
-/* 253 */,
-/* 254 */,
-/* 255 */
+/* 181 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// https://d3js.org Version 4.2.2. Copyright 2016 Mike Bostock.
