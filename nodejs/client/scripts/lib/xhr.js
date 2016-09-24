@@ -1,12 +1,12 @@
-localStorage.token = localStorage.token || (Date.now()*Math.random());
+localStorage.token = localStorage.token || (Date.now() * Math.random());
 
-function setToken(req) {
+const setToken = (req) => {
   req.setRequestHeader('authorization', localStorage.token);
-}
+};
 
-function getJSON(url, cb) {
-  var req = new XMLHttpRequest();
-  req.onload = function () {
+const getJSON = (url, cb) => {
+  const req = new XMLHttpRequest();
+  req.onload = () => {
     if (req.status === 404) {
       cb(new Error('not found'));
     } else {
@@ -16,29 +16,30 @@ function getJSON(url, cb) {
   req.open('GET', url);
   setToken(req);
   req.send();
-}
+};
 
-function postJSON(url, obj, cb) {
-  var req = new XMLHttpRequest();
-  req.onload = function () {
+const postJSON = (url, obj, cb) => {
+  const req = new XMLHttpRequest();
+  req.onload = () => {
     cb(JSON.parse(req.response));
   };
   req.open('POST', url);
   req.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
   setToken(req);
   req.send(JSON.stringify(obj));
-}
+};
 
-function deleteJSON(url, cb) {
-  var req = new XMLHttpRequest();
+const deleteJSON = (url, cb) => {
+  const req = new XMLHttpRequest();
   req.onload = cb;
   req.open('DELETE', url);
   setToken(req);
   req.send();
-}
-
-module.exports = {
-  getJSON: getJSON,
-  postJSON: postJSON,
-  deleteJSON: deleteJSON
 };
+
+export default {
+  getJSON,
+  postJSON,
+  deleteJSON
+};
+
