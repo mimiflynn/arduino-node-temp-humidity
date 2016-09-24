@@ -22,7 +22,7 @@ module.exports = {
         loader: 'babel',
         exclude: __dirname + '/node_modules',
         query: {
-          presets:['react']
+          presets:['react', 'es2015']
         }
       }
     ]

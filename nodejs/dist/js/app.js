@@ -44,6 +44,8 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
+	'use strict';
+	
 	var React = __webpack_require__(1);
 	var render = __webpack_require__(38).render;
 	var Dht = __webpack_require__(168);
@@ -20327,6 +20329,8 @@
 /* 168 */
 /***/ function(module, exports, __webpack_require__) {
 
+	'use strict';
+	
 	var React = __webpack_require__(1);
 	
 	var Store = __webpack_require__(169);
@@ -20337,17 +20341,18 @@
 	module.exports = React.createClass({
 	  displayName: 'exports',
 	
-	  componentDidMount: function () {
+	  componentDidMount: function componentDidMount() {
 	    Store.addChangeListener(this.handleStoreChange);
 	    ViewActionCreators.loadDht();
 	  },
-	  componentWillUnmount() {
+	  componentWillUnmount: function componentWillUnmount() {
 	    Store.removeChangeListener(this.handleStoreChange);
 	  },
-	  handleStoreChange: function () {
+	
+	  handleStoreChange: function handleStoreChange() {
 	    this.setState(Store.getState());
 	  },
-	  render: function () {
+	  render: function render() {
 	    console.log('STATE', this.state);
 	    var data = this.state && this.state.dht ? this.state.dht : window.data;
 	    return React.createElement(Graph, { data: data });
@@ -20358,6 +20363,8 @@
 /* 169 */
 /***/ function(module, exports, __webpack_require__) {
 
+	'use strict';
+	
 	var AppDispatcher = __webpack_require__(170);
 	var EventEmitter = __webpack_require__(175).EventEmitter;
 	var ActionTypes = __webpack_require__(174).ActionTypes;
@@ -20377,15 +20384,15 @@
 	}
 	
 	var DhtStore = {
-	  addChangeListener: function (fn) {
+	  addChangeListener: function addChangeListener(fn) {
 	    events.addListener(CHANGE_EVENT, fn);
 	  },
 	
-	  removeChangeListener: function (fn) {
+	  removeChangeListener: function removeChangeListener(fn) {
 	    events.removeListener(CHANGE_EVENT, fn);
 	  },
 	
-	  getState: function () {
+	  getState: function getState() {
 	    return state;
 	  }
 	};
@@ -20414,12 +20421,14 @@
 /* 170 */
 /***/ function(module, exports, __webpack_require__) {
 
+	'use strict';
+	
 	var assign = Object.assign;
 	var Dispatcher = __webpack_require__(171).Dispatcher;
 	var PayloadSources = __webpack_require__(174).PayloadSources;
 	
 	var AppDispatcher = assign(new Dispatcher(), {
-	  handleServerAction: function (action) {
+	  handleServerAction: function handleServerAction(action) {
 	    var payload = {
 	      source: PayloadSources.SERVER_ACTION,
 	      action: action
@@ -20427,7 +20436,7 @@
 	    this.dispatch(payload);
 	  },
 	
-	  handleViewAction: function (action) {
+	  handleViewAction: function handleViewAction(action) {
 	    var payload = {
 	      source: PayloadSources.VIEW_ACTION,
 	      action: action
@@ -20750,6 +20759,8 @@
 /* 174 */
 /***/ function(module, exports) {
 
+	'use strict';
+	
 	module.exports = {
 	  API: 'http://localhost:3000/api',
 	
@@ -21073,19 +21084,21 @@
 /* 176 */
 /***/ function(module, exports, __webpack_require__) {
 
+	'use strict';
+	
 	var ActionTypes = __webpack_require__(174).ActionTypes;
 	var AppDispatcher = __webpack_require__(170);
 	var APIUtils = __webpack_require__(177);
 	
 	var ViewActionCreators = {
-	  loadDht: function () {
+	  loadDht: function loadDht() {
 	    AppDispatcher.handleViewAction({
 	      type: ActionTypes.LOAD_DHT
 	    });
 	    APIUtils.loadDht();
 	  },
 	
-	  deleteDht: function (dht) {
+	  deleteDht: function deleteDht(dht) {
 	    AppDispatcher.handleViewAction({
 	      type: ActionTypes.DHT_DELETED,
 	      dht: dht
@@ -21100,19 +21113,21 @@
 /* 177 */
 /***/ function(module, exports, __webpack_require__) {
 
+	'use strict';
+	
 	var xhr = __webpack_require__(178);
 	var API = __webpack_require__(174).API;
 	var ActionTypes = __webpack_require__(174).ActionTypes;
 	var ServerActionCreators = __webpack_require__(179);
 	
 	var APIUtils = {
-	  loadDht: function () {
+	  loadDht: function loadDht() {
 	    xhr.getJSON(API + '/dht/latest', function (err, res) {
 	      ServerActionCreators.loadedDht(res);
 	    });
 	  },
 	
-	  deleteDht: function (dht) {
+	  deleteDht: function deleteDht(dht) {
 	    xhr.deleteJSON(API + '/dht/' + dht.id, function (err, res) {
 	      ServerActionCreators.deletedDht(dht);
 	    });
@@ -21125,14 +21140,16 @@
 /* 178 */
 /***/ function(module, exports) {
 
+	'use strict';
+	
 	localStorage.token = localStorage.token || Date.now() * Math.random();
 	
-	const setToken = function (req) {
+	var setToken = function setToken(req) {
 	  req.setRequestHeader('authorization', localStorage.token);
 	};
 	
-	const getJSON = function (url, cb) {
-	  const req = new XMLHttpRequest();
+	var getJSON = function getJSON(url, cb) {
+	  var req = new XMLHttpRequest();
 	  req.onload = function () {
 	    if (req.status === 404) {
 	      cb(new Error('not found'));
@@ -21145,8 +21162,8 @@
 	  req.send();
 	};
 	
-	const postJSON = function (url, obj, cb) {
-	  const req = new XMLHttpRequest();
+	var postJSON = function postJSON(url, obj, cb) {
+	  var req = new XMLHttpRequest();
 	  req.onload = function () {
 	    cb(JSON.parse(req.response));
 	  };
@@ -21156,8 +21173,8 @@
 	  req.send(JSON.stringify(obj));
 	};
 	
-	const deleteJSON = function (url, cb) {
-	  const req = new XMLHttpRequest();
+	var deleteJSON = function deleteJSON(url, cb) {
+	  var req = new XMLHttpRequest();
 	  req.onload = cb;
 	  req.open('DELETE', url);
 	  setToken(req);
@@ -21174,18 +21191,20 @@
 /* 179 */
 /***/ function(module, exports, __webpack_require__) {
 
+	'use strict';
+	
 	var ActionTypes = __webpack_require__(174).ActionTypes;
 	var AppDispatcher = __webpack_require__(170);
 	
 	var ServerActionCreators = {
-	  loadedDht: function (dht) {
+	  loadedDht: function loadedDht(dht) {
 	    AppDispatcher.handleServerAction({
 	      type: ActionTypes.DHT_LOADED,
 	      dht: dht
 	    });
 	  },
 	
-	  deletedDht: function (dht) {
+	  deletedDht: function deletedDht(dht) {
 	    AppDispatcher.handleServerAction({
 	      type: ActionTypes.DHT_DELETED,
 	      dht: dht
@@ -21199,6 +21218,8 @@
 /* 180 */
 /***/ function(module, exports, __webpack_require__) {
 
+	'use strict';
+	
 	var React = __webpack_require__(1);
 	var d3 = __webpack_require__(181);
 	
@@ -21242,11 +21263,11 @@
 	    propTypes: {
 	        data: React.PropTypes.array
 	    },
-	    componentDidMount: function () {
+	    componentDidMount: function componentDidMount() {
 	        console.log('init chart');
 	        InitChart(this.props.data);
 	    },
-	    render: function () {
+	    render: function render() {
 	        return React.createElement(
 	            'h2',
 	            null,
