@@ -18,7 +18,7 @@ module.exports = new LinkedinStrategy({
     callbackURL: config.linkedin.callbackURL,
     profileFields: ['id', 'first-name', 'last-name', 'email-address']
   },
-  function(accessToken, refreshToken, profile, done) {
+  function (accessToken, refreshToken, profile, done) {
     var options = {
       criteria: { 'linkedin.id': profile.id }
     };

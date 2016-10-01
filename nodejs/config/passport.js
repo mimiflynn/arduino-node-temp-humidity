@@ -20,11 +20,11 @@ var github = require('./passport/github');
 
 module.exports = function (passport, config) {
   // serialize sessions
-  passport.serializeUser(function(user, done) {
+  passport.serializeUser(function (user, done) {
     done(null, user.id)
   })
 
-  passport.deserializeUser(function(id, done) {
+  passport.deserializeUser(function (id, done) {
     User.load({ criteria: { _id: id } }, function (err, user) {
       done(err, user)
     })

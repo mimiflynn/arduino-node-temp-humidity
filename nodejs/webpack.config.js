@@ -3,7 +3,7 @@ module.exports = {
     extensions: [
       '',
       '.js',
-      '.jsx',
+      '.jsx'
     ],
   },
   entry: __dirname + '/client/scripts/app.js',

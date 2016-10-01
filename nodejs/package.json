@@ -8,20 +8,20 @@
   },
   "license": "MIT",
   "engines": {
-    "node": ">= 6.2.0"
+    "node": ">= 6.2.2"
   },
   "scripts": {
-    "start": "NODE_PATH=./config:./server/controllers NODE_ENV=development ./node_modules/.bin/nodemon server.js --exec babel-node --presets es2015,stage-2",
-    "test": "make test"
+    "lint": "eslint .",
+    "start": "NODE_PATH=./config:./server/controllers NODE_ENV=development ./node_modules/.bin/nodemon server.js --exec babel-node"
   },
   "dependencies": {
     "async": "1.3.0",
     "babel-cli": "^6.14.0",
-    "babel-core": "^6.0.0",
-    "babel-eslint": "^6.0.4",
-    "babel-loader": "^6.2.4",
+    "babel-core": "^6.14.0",
+    "babel-eslint": "^6.1.2",
+    "babel-loader": "^6.2.5",
     "babel-preset-es2015": "^6.14.0",
-    "babel-preset-react": "^6.5.0",
+    "babel-preset-react": "^6.11.1",
     "babel-preset-stage-2": "^6.13.0",
     "body-parser": "^1.15.1",
     "compression": "^1.6.2",
@@ -31,6 +31,12 @@
     "cookie-session": "1.2.0",
     "csurf": "^1.9.0",
     "d3": "^4.2.2",
+    "eslint": "^2.13.1",
+    "eslint-config-airbnb": "^9.0.1",
+    "eslint-loader": "^1.5.0",
+    "eslint-plugin-import": "^1.16.0",
+    "eslint-plugin-jsx-a11y": "^1.5.5",
+    "eslint-plugin-react": "^5.2.2",
     "events": "^1.0.2",
     "express": "^4.13.4",
     "express-react-views": "^0.10.2",
@@ -44,7 +50,7 @@
     "mongoose": "^4.4.20",
     "mongoose-user": "latest",
     "morgan": "^1.7.0",
-    "node-jsx": "^0.13.3",
+    "nodemon": "^1.10.2",
     "passport": "^0.3.2",
     "passport-facebook": "^2.1.1",
     "passport-github": "^1.1.0",
@@ -62,23 +68,13 @@
     "winston": "^2.2.0"
   },
   "devDependencies": {
-    "eslint": "^2.11.1",
-    "eslint-config-airbnb": "^9.0.1",
-    "eslint-loader": "^1.3.0",
-    "eslint-plugin-import": "^1.8.1",
-    "eslint-plugin-jsx-a11y": "^1.3.0",
-    "eslint-plugin-react": "^5.1.1",
     "grunt": "^1.0.1",
     "grunt-connect": "^0.2.0",
     "grunt-contrib-clean": "^1.0.0",
     "grunt-contrib-watch": "^1.0.0",
     "grunt-webpack": "^1.0.11",
-    "mocha": "latest",
-    "nodemon": "latest",
     "react-tools": "^0.13.3",
-    "should": "^9.0.0",
-    "supertest": "^1.2.0",
-    "webpack": "^1.11.0",
+    "webpack": "^1.13.2",
     "webpack-dev-server": "^1.10.1"
   },
   "repository": {

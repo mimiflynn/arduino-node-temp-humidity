@@ -17,7 +17,7 @@ module.exports = new TwitterStrategy({
     consumerSecret: config.twitter.clientSecret,
     callbackURL: config.twitter.callbackURL
   },
-  function(accessToken, refreshToken, profile, done) {
+  function (accessToken, refreshToken, profile, done) {
     var options = {
       criteria: { 'twitter.id': profile.id }
     };

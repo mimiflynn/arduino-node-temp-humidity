@@ -17,7 +17,7 @@ module.exports = new FacebookStrategy({
     clientSecret: config.facebook.clientSecret,
     callbackURL: config.facebook.callbackURL
   },
-  function(accessToken, refreshToken, profile, done) {
+  function (accessToken, refreshToken, profile, done) {
     var options = {
       criteria: { 'facebook.id': profile.id }
     };

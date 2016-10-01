@@ -10,24 +10,24 @@ module.exports = React.createClass({
       <DefaultLayout title={this.props.title}>
         <section>
           <a href="/auth/facebook">
-            <img src="/img/facebook.png" alt="facebook auth">
+            <img src="/img/facebook.png" alt="facebook auth" />
           </a>
           <a href="/auth/github">
-            <img src="/img/github.png" alt="github auth">
+            <img src="/img/github.png" alt="github auth" />
           </a>
           <a href="/auth/twitter">
-            <img src="/img/twitter.png" alt="twitter auth">
+            <img src="/img/twitter.png" alt="twitter auth" />
           </a>
           <a href="/auth/google">
-            <img src="/img/google.png" alt="google auth">
+            <img src="/img/google.png" alt="google auth" />
           </a>
           <a href="/auth/linkedin">
-            <img src="/img/linkedin.png" alt="linkedin auth">
+            <img src="/img/linkedin.png" alt="linkedin auth" />
           </a>
-          <br>
+          <br />
           <h2>OR</h2>
-          <br>
-          <Login>
+          <br />
+          <Login />
         </section>
       </DefaultLayout>
     )

@@ -19,7 +19,7 @@ exports.index = function (req, res) {
     criteria: criteria
   };
 
-  Recipe.list(options, function(err, recipes) {
+  Recipe.list(options, function (err, recipes) {
     if (err) return res.render('500');
     Recipe.count(criteria).exec(function (err, count) {
       res.render('recipes/index', {

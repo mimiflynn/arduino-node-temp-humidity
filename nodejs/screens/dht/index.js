@@ -14,7 +14,7 @@ const scripts = [
 // already rendering from server
 // need to re-render in client with data for chart
 class Dht extends Component {
-  render() {
+  render () {
     const data = 'window.data = ' + JSON.stringify(this.props.data) + '';
 
     return (

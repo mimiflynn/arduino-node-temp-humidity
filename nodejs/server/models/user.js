@@ -40,12 +40,12 @@ var UserSchema = new Schema({
 
 UserSchema
   .virtual('password')
-  .set(function(password) {
+  .set(function (password) {
     this._password = password;
     this.salt = this.makeSalt();
     this.hashed_password = this.encryptPassword(password);
   })
-  .get(function() { return this._password });
+  .get(function () { return this._password });
 
 /**
  * Validations
@@ -94,7 +94,7 @@ UserSchema.path('hashed_password').validate(function (hashed_password) {
  * Pre-save hook
  */
 
-UserSchema.pre('save', function(next) {
+UserSchema.pre('save', function (next) {
   if (!this.isNew) return next();
 
   if (!validatePresenceOf(this.password) && !this.skipValidation()) {
@@ -157,7 +157,7 @@ UserSchema.methods = {
    * Validation is not required if using OAuth
    */
 
-  skipValidation: function() {
+  skipValidation: function () {
     return ~oAuthTypes.indexOf(this.provider);
   }
 };

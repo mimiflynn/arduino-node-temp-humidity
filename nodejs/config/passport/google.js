@@ -17,7 +17,7 @@ module.exports = new GoogleStrategy({
     clientSecret: config.google.clientSecret,
     callbackURL: config.google.callbackURL
   },
-  function(accessToken, refreshToken, profile, done) {
+  function (accessToken, refreshToken, profile, done) {
     var options = {
       criteria: { 'google.id': profile.id }
     };

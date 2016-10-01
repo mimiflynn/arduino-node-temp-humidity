@@ -16,7 +16,7 @@ module.exports = new LocalStrategy({
     usernameField: 'email',
     passwordField: 'password'
   },
-  function(email, password, done) {
+  function (email, password, done) {
     var options = {
       criteria: { email: email },
       select: 'name username email hashed_password salt'

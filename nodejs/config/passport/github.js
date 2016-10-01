@@ -17,7 +17,7 @@ module.exports = new GithubStrategy({
     clientSecret: config.github.clientSecret,
     callbackURL: config.github.callbackURL
   },
-  function(accessToken, refreshToken, profile, done) {
+  function (accessToken, refreshToken, profile, done) {
     var options = {
       criteria: { 'github.id': profile.id }
     };
