@@ -1,9 +1,15 @@
-import  { PropTypes } from 'react';
+import React, { PropTypes } from 'react';
 
 import Item from './item';
 
-const List = ({}) => {
-    var items = this.props.data.map(function (item, index) {
+const List = ({
+  title,
+  isAuthenticated,
+  data,
+  page,
+  pages
+}) => {
+    var items = data.map(function (item, index) {
       return (
         <li className="list-group-item" key={ 'dht-' + index }>
           <Item data={ item } />
@@ -25,4 +31,4 @@ List.propTypes = {
   pages: PropTypes.number
 };
 
-export default Item;
+export default List;
