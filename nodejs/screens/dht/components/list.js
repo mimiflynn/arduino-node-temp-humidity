@@ -1,16 +1,8 @@
-var React = require('react');
+import  { PropTypes } from 'react';
 
-var Item = require('./item');
+import Item from './item';
 
-module.exports = React.createClass({
-  propTypes: {
-    title: React.PropTypes.string,
-    isAuthenticated: React.PropTypes.bool,
-    data: React.PropTypes.array,
-    page: React.PropTypes.number,
-    pages: React.PropTypes.number
-  },
-  render: function () {
+const List = ({}) => {
     var items = this.props.data.map(function (item, index) {
       return (
         <li className="list-group-item" key={ 'dht-' + index }>
@@ -24,5 +16,13 @@ module.exports = React.createClass({
       </ul>
     );
   }
-});
 
+List.propTypes = {
+  title: PropTypes.string,
+  isAuthenticated: PropTypes.bool,
+  data: PropTypes.array,
+  page: PropTypes.number,
+  pages: PropTypes.number
+};
+
+export default Item;
