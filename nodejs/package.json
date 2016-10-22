@@ -12,7 +12,8 @@
   },
   "scripts": {
     "lint": "eslint .",
-    "start": "NODE_PATH=./config:./server/controllers NODE_ENV=development ./node_modules/.bin/nodemon server.js --exec babel-node"
+    "start": "NODE_PATH=./config:./server/controllers NODE_ENV=development ./node_modules/.bin/nodemon server.js --exec babel-node",
+    "dev": "SENSOR=false NODE_PATH=./config:./server/controllers NODE_ENV=development ./node_modules/.bin/nodemon server.js --exec babel-node"
   },
   "dependencies": {
     "async": "1.3.0",

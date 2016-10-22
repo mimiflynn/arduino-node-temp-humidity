@@ -11,6 +11,11 @@ var config = require('config');
 
 var app = express();
 var port = process.env.PORT || 3000;
+var sensor = process.env.SENSOR || 'true';
+
+console.log('--------------------------------------------------');
+console.log('SENSOR: ', sensor);
+console.log('--------------------------------------------------');
 
 // Connect to mongodb
 var connect = function () {
@@ -40,7 +45,8 @@ app.listen(port);
 console.log('Express app started on port ' + port);
 
 // attempt to hackily add data to the things
-var arduino = require('./arduino/data');
-
- arduino();
+if (sensor === 'true') {
+  var arduino = require('./arduino/data');
+  arduino();
+}
 
