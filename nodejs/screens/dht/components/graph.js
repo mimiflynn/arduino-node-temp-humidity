@@ -86,7 +86,7 @@ function InitHumChart (dht) {
 
       xScale = d3.scaleTime().range([MARGINS.left, WIDTH - MARGINS.right]).domain(timeDomain),
 
-      yScale = d3.scaleLinear().range([HEIGHT - MARGINS.top, MARGINS.bottom]).domain([50, 20]),
+      yScale = d3.scaleLinear().range([HEIGHT - MARGINS.top, MARGINS.bottom]).domain([20, 50]),
 
       xAxis = d3.axisBottom()
         .scale(xScale),
