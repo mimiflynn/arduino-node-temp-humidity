@@ -65,30 +65,30 @@ function InitChart (dht) {
   vis.append("svg:g")
       .attr("class", "y axis")
       .attr("transform", "translate(" + (MARGINS.left) + ",0)")
-      .attr('stroke', 'blue')
+      .attr('stroke', 'red')
       .call(yAxisLeft);
 
     vis.append("svg:g")
       .attr("class", "y axis")
       .attr("transform", "translate(" + (WIDTH - MARGINS.right) + ",0)")
-      .attr('stroke', 'green')
+      .attr('stroke', 'blue')
       .call(yAxisRight);
 
   vis.append('svg:path')
       .attr('d', lineGenTemp(dht))
-      .attr('stroke', 'blue')
+      .attr('stroke', 'red')
       .attr('stroke-width', 2)
       .attr('fill', 'none');
 
   // vis.append('svg:path')
   //     .attr('d', lineGenDP(dht))
-  //     .attr('stroke', 'red')
+  //     .attr('stroke', 'green')
   //     .attr('stroke-width', 2)
   //     .attr('fill', 'none');
 
   vis.append('svg:path')
       .attr('d', lineGenHum(dht))
-      .attr('stroke', 'green')
+      .attr('stroke', 'blue')
       .attr('stroke-width', 2)
       .attr('fill', 'none');
 }
