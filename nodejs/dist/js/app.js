@@ -22341,75 +22341,81 @@
 	
 	function InitChart(dht) {
 	
-	    // Get time range from data
-	    // assuming data is sorted in decending order
+	  // Get time range from data
+	  // assuming data is sorted in decending order
 	
-	    var timeDomain = [new Date(dht[119].date), new Date(dht[0].date)];
+	  var timeDomain = [new Date(dht[119].date), new Date(dht[0].date)];
 	
-	    var vis = d3.select("#visualization"),
-	        WIDTH = 1000,
-	        HEIGHT = 500,
-	        MARGINS = {
-	        top: 20,
-	        right: 20,
-	        bottom: 20,
-	        left: 50
-	    },
-	        xScale = d3.scaleTime().range([MARGINS.left, WIDTH - MARGINS.right]).domain(timeDomain),
-	        yScaleLeft = d3.scaleLinear().range([HEIGHT - MARGINS.top, MARGINS.bottom]).domain([68, 82]),
-	        yScaleRight = d3.scaleLinear().range([HEIGHT - MARGINS.top, MARGINS.bottom]).domain([20, 50]),
-	        xAxis = d3.axisBottom().scale(xScale),
-	        yAxisLeft = d3.axisLeft().scale(yScaleLeft),
-	        yAxisRight = d3.axisRight().scale(yScaleRight);
+	  var vis = d3.select("#visualization"),
+	      WIDTH = 1000,
+	      HEIGHT = 500,
+	      MARGINS = {
+	    top: 20,
+	    right: 20,
+	    bottom: 20,
+	    left: 50
+	  },
+	      xScale = d3.scaleTime().range([MARGINS.left, WIDTH - MARGINS.right]).domain(timeDomain),
+	      yScaleLeft = d3.scaleLinear().range([HEIGHT - MARGINS.top, MARGINS.bottom]).domain([68, 82]),
+	      yScaleRight = d3.scaleLinear().range([HEIGHT - MARGINS.top, MARGINS.bottom]).domain([20, 50]),
+	      xAxis = d3.axisBottom().scale(xScale),
+	      yAxisLeft = d3.axisLeft().scale(yScaleLeft),
+	      yAxisRight = d3.axisRight().scale(yScaleRight);
 	
-	    var lineGenTemp = d3.line().x(function (d) {
-	        return xScale(new Date(d.date));
-	    }).y(function (d) {
-	        return yScaleLeft(d.fahrenheit);
-	    });
+	  var lineGenTemp = d3.line().x(function (d) {
+	    return xScale(new Date(d.date));
+	  }).y(function (d) {
+	    return yScaleLeft(d.fahrenheit);
+	  });
 	
-	    var lineGenDP = d3.line().x(function (d) {
-	        return xScale(new Date(d.date));
-	    }).y(function (d) {
-	        return yScaleLeft(d.hif);
-	    });
+	  // var lineGenDP = d3.line()
+	  //     .x(function (d) {
+	  //         return xScale(new Date(d.date));
+	  //     })
+	  //     .y(function (d) {
+	  //         return yScaleLeft(d.hif);
+	  //     });
 	
-	    var lineGenHum = d3.line().x(function (d) {
-	        return xScale(new Date(d.date));
-	    }).y(function (d) {
-	        return yScaleRight(d.humidity);
-	    });
+	  var lineGenHum = d3.line().x(function (d) {
+	    return xScale(new Date(d.date));
+	  }).y(function (d) {
+	    return yScaleRight(d.humidity);
+	  });
 	
-	    vis.append("svg:g").attr("class", "x axis").attr("transform", "translate(0," + (HEIGHT - MARGINS.bottom) + ")").call(xAxis);
+	  vis.append("svg:g").attr("class", "x axis").attr("transform", "translate(0," + (HEIGHT - MARGINS.bottom) + ")").call(xAxis);
 	
-	    vis.append("svg:g").attr("class", "y axis").attr("transform", "translate(" + MARGINS.left + ",0)").call(yAxisLeft);
+	  vis.append("svg:g").attr("class", "y axis").attr("transform", "translate(" + MARGINS.left + ",0)").attr('stroke', 'blue').call(yAxisLeft);
 	
-	    vis.append("svg:g").attr("class", "y axis").attr("transform", "translate(" + (WIDTH - MARGINS.right) + ",0)").call(yAxisRight);
+	  vis.append("svg:g").attr("class", "y axis").attr("transform", "translate(" + (WIDTH - MARGINS.right) + ",0)").attr('stroke', 'green').call(yAxisRight);
 	
-	    vis.append('svg:path').attr('d', lineGenTemp(dht)).attr('stroke', 'blue').attr('stroke-width', 2).attr('fill', 'none');
+	  vis.append('svg:path').attr('d', lineGenTemp(dht)).attr('stroke', 'blue').attr('stroke-width', 2).attr('fill', 'none');
 	
-	    vis.append('svg:path').attr('d', lineGenDP(dht)).attr('stroke', 'red').attr('stroke-width', 2).attr('fill', 'none');
+	  // vis.append('svg:path')
+	  //     .attr('d', lineGenDP(dht))
+	  //     .attr('stroke', 'red')
+	  //     .attr('stroke-width', 2)
+	  //     .attr('fill', 'none');
 	
-	    vis.append('svg:path').attr('d', lineGenHum(dht)).attr('stroke', 'green').attr('stroke-width', 2).attr('fill', 'none');
+	  vis.append('svg:path').attr('d', lineGenHum(dht)).attr('stroke', 'green').attr('stroke-width', 2).attr('fill', 'none');
 	}
 	
 	var chartD3 = React.createClass({
-	    displayName: 'chartD3',
+	  displayName: 'chartD3',
 	
-	    propTypes: {
-	        data: React.PropTypes.array
-	    },
-	    componentDidMount: function componentDidMount() {
-	        console.log('init chart');
-	        InitChart(this.props.data);
-	    },
-	    render: function render() {
-	        return React.createElement(
-	            'h2',
-	            null,
-	            'Temperature and humidity over time'
-	        );
-	    }
+	  propTypes: {
+	    data: React.PropTypes.array
+	  },
+	  componentDidMount: function componentDidMount() {
+	    console.log('init chart');
+	    InitChart(this.props.data);
+	  },
+	  render: function render() {
+	    return React.createElement(
+	      'h2',
+	      null,
+	      'Temperature and humidity over time'
+	    );
+	  }
 	});
 	
 	module.exports = chartD3;
