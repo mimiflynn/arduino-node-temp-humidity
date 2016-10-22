@@ -11,7 +11,9 @@
 
 ## Development
 
-Since this is a mix of a couple things, I have two terminals running watches: one running `npm start` and another running `webpack --watch`.
+Since this is a mix of a couple things, I have two terminals running watches: one running `npm run dev` and another running `webpack --watch`.
+
+A sample database is located in `/db/prod/dht`. Load it into `localhost` Mongodb as `dht`.
 
 ### D3
 
