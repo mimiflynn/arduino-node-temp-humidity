@@ -12,21 +12,37 @@ function InitChart (dht) {
       WIDTH = 1000,
       HEIGHT = 500,
       MARGINS = {
-          top: 20,
-          right: 20,
-          bottom: 20,
-          left: 50
+        top: 20,
+        right: 20,
+        bottom: 20,
+        left: 50
       },
 
       xScale = d3.scaleTime().range([MARGINS.left, WIDTH - MARGINS.right]).domain(timeDomain),
 
-      yScale = d3.scaleLinear().range([HEIGHT - MARGINS.top, MARGINS.bottom]).domain([65, 85]),
+      yScale = d3.scaleLinear().range([HEIGHT - MARGINS.top, MARGINS.bottom]).domain([68, 82]),
 
       xAxis = d3.axisBottom()
-      .scale(xScale),
+        .scale(xScale),
 
       yAxis = d3.axisLeft()
-      .scale(yScale);
+        .scale(yScale);
+
+  var lineGenTemp = d3.line()
+      .x(function (d) {
+          return xScale(new Date(d.date));
+      })
+      .y(function (d) {
+          return yScale(d.fahrenheit);
+      });
+
+  var lineGenDP = d3.line()
+      .x(function (d) {
+          return xScale(new Date(d.date));
+      })
+      .y(function (d) {
+          return yScale(d.hif);
+      });
 
   vis.append("svg:g")
       .attr("class", "x axis")
@@ -38,17 +54,15 @@ function InitChart (dht) {
       .attr("transform", "translate(" + (MARGINS.left) + ",0)")
       .call(yAxis);
 
-  var lineGen = d3.line()
-      .x(function (d) {
-          return xScale(new Date(d.date));
-      })
-      .y(function (d) {
-          return yScale(d.fahrenheit);
-      });
+  vis.append('svg:path')
+      .attr('d', lineGenTemp(dht))
+      .attr('stroke', 'blue')
+      .attr('stroke-width', 2)
+      .attr('fill', 'none');
 
   vis.append('svg:path')
-      .attr('d', lineGen(dht))
-      .attr('stroke', 'blue')
+      .attr('d', lineGenDP(dht))
+      .attr('stroke', 'red')
       .attr('stroke-width', 2)
       .attr('fill', 'none');
 }

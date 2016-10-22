@@ -16027,7 +16027,8 @@
 	  if (x === y) {
 	    // Steps 1-5, 7-10
 	    // Steps 6.b-6.e: +0 != -0
-	    return x !== 0 || 1 / x === 1 / y;
+	    // Added the nonzero y check to make Flow happy, but it is redundant
+	    return x !== 0 || y !== 0 || 1 / x === 1 / y;
 	  } else {
 	    // Step 6.a: NaN == NaN
 	    return x !== x && y !== y;
@@ -22355,21 +22356,29 @@
 	        left: 50
 	    },
 	        xScale = d3.scaleTime().range([MARGINS.left, WIDTH - MARGINS.right]).domain(timeDomain),
-	        yScale = d3.scaleLinear().range([HEIGHT - MARGINS.top, MARGINS.bottom]).domain([65, 85]),
+	        yScale = d3.scaleLinear().range([HEIGHT - MARGINS.top, MARGINS.bottom]).domain([68, 82]),
 	        xAxis = d3.axisBottom().scale(xScale),
 	        yAxis = d3.axisLeft().scale(yScale);
 	
-	    vis.append("svg:g").attr("class", "x axis").attr("transform", "translate(0," + (HEIGHT - MARGINS.bottom) + ")").call(xAxis);
-	
-	    vis.append("svg:g").attr("class", "y axis").attr("transform", "translate(" + MARGINS.left + ",0)").call(yAxis);
-	
-	    var lineGen = d3.line().x(function (d) {
+	    var lineGenTemp = d3.line().x(function (d) {
 	        return xScale(new Date(d.date));
 	    }).y(function (d) {
 	        return yScale(d.fahrenheit);
 	    });
 	
-	    vis.append('svg:path').attr('d', lineGen(dht)).attr('stroke', 'blue').attr('stroke-width', 2).attr('fill', 'none');
+	    var lineGenDP = d3.line().x(function (d) {
+	        return xScale(new Date(d.date));
+	    }).y(function (d) {
+	        return yScale(d.hif);
+	    });
+	
+	    vis.append("svg:g").attr("class", "x axis").attr("transform", "translate(0," + (HEIGHT - MARGINS.bottom) + ")").call(xAxis);
+	
+	    vis.append("svg:g").attr("class", "y axis").attr("transform", "translate(" + MARGINS.left + ",0)").call(yAxis);
+	
+	    vis.append('svg:path').attr('d', lineGenTemp(dht)).attr('stroke', 'blue').attr('stroke-width', 2).attr('fill', 'none');
+	
+	    vis.append('svg:path').attr('d', lineGenDP(dht)).attr('stroke', 'red').attr('stroke-width', 2).attr('fill', 'none');
 	}
 	
 	var chartD3 = React.createClass({
