@@ -17,7 +17,7 @@ var chartD3 = React.createClass({
         bottom: 20,
         left: 50
       },
-      yLeftDomain: [68, 82],
+      yLeftDomain: [50, 82],
       yRightDomain: [20, 50]
     });
   },

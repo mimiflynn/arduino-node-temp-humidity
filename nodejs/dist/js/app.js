@@ -22357,7 +22357,7 @@
 	        bottom: 20,
 	        left: 50
 	      },
-	      yLeftDomain: [68, 82],
+	      yLeftDomain: [50, 82],
 	      yRightDomain: [20, 50]
 	    });
 	  },
@@ -22381,20 +22381,34 @@
 	var d3 = __webpack_require__(186);
 	
 	var initChart = function initChart(options) {
+	    var defaults = {
+	        width: 1000,
+	        height: 500,
+	        margins: {
+	            top: 20,
+	            right: 20,
+	            bottom: 20,
+	            left: 50
+	        },
+	        yLeftDomain: [68, 82],
+	        yRightDomain: [20, 50]
+	    };
+	
+	    var graphOptions = Object.assign({}, defaults, options);
+	
 	    var dht = options.dht;
 	
 	    // Get time range from data
 	    // assuming data is sorted in decending order
-	
 	    var timeDomain = [new Date(dht[119].date), new Date(dht[0].date)];
 	
 	    var vis = d3.select("#visualization"),
-	        WIDTH = options.width || 1000,
-	        HEIGHT = options.height || 500,
-	        MARGINS = options.margins,
+	        WIDTH = graphOptions.width,
+	        HEIGHT = graphOptions.height,
+	        MARGINS = graphOptions.margins,
 	        xScale = d3.scaleTime().range([MARGINS.left, WIDTH - MARGINS.right]).domain(timeDomain),
-	        yScaleLeft = d3.scaleLinear().range([HEIGHT - MARGINS.top, MARGINS.bottom]).domain([68, 82]),
-	        yScaleRight = d3.scaleLinear().range([HEIGHT - MARGINS.top, MARGINS.bottom]).domain([20, 50]),
+	        yScaleLeft = d3.scaleLinear().range([HEIGHT - MARGINS.top, MARGINS.bottom]).domain(graphOptions.yLeftDomain),
+	        yScaleRight = d3.scaleLinear().range([HEIGHT - MARGINS.top, MARGINS.bottom]).domain(graphOptions.yRightDomain),
 	        xAxis = d3.axisBottom().scale(xScale),
 	        yAxisLeft = d3.axisLeft().scale(yScaleLeft),
 	        yAxisRight = d3.axisRight().scale(yScaleRight);
