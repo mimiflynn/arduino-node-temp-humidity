@@ -20,17 +20,24 @@ var chartD3 = React.createClass({
       yRightDomain: [20, 50]
     };
   },
-  onEnter: function (event) {
-    console.log('key ');
+  onTempEnter: function (event) {
     if (event.key === 'Enter') {
-      console.log('ENTER', event.target);
       this.onTempChange(event.target.value);
     }
   },
   onTempChange: function (value) {
-    console.log('value ', value);
     this.setState({
       yLeftDomain: value.split(',')
+    });
+  },
+  onHumEnter: function (event) {
+    if (event.key === 'Enter') {
+      this.onHumChange(event.target.value);
+    }
+  },
+  onHumChange: function (value) {
+    this.setState({
+      yRightDomain: value.split(',')
     });
   },
   componentDidMount: function () {
@@ -50,7 +57,11 @@ var chartD3 = React.createClass({
         <h2>Temperature and humidity over time</h2>
         <div className="input-group">
           <span className="input-group-addon" id="temp">Temperature [low, high]</span>
-          <input type="text" ref="yLeftDomain" className="form-control" placeholder={this.state.yLeftDomain} onKeyPress={this.onEnter} />
+          <input type="text" ref="yLeftDomain" className="form-control" placeholder={this.state.yLeftDomain} onKeyPress={this.onTempEnter} />
+        </div>
+        <div className="input-group">
+          <span className="input-group-addon" id="temp">Humidity [low, high]</span>
+          <input type="text" ref="yRightDomain" className="form-control" placeholder={this.state.yRightDomain} onKeyPress={this.onHumEnter} />
         </div>
       </div>
     );

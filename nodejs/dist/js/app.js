@@ -22360,17 +22360,24 @@
 	      yRightDomain: [20, 50]
 	    };
 	  },
-	  onEnter: function onEnter(event) {
-	    console.log('key ');
+	  onTempEnter: function onTempEnter(event) {
 	    if (event.key === 'Enter') {
-	      console.log('ENTER', event.target);
 	      this.onTempChange(event.target.value);
 	    }
 	  },
 	  onTempChange: function onTempChange(value) {
-	    console.log('value ', value);
 	    this.setState({
 	      yLeftDomain: value.split(',')
+	    });
+	  },
+	  onHumEnter: function onHumEnter(event) {
+	    if (event.key === 'Enter') {
+	      this.onHumChange(event.target.value);
+	    }
+	  },
+	  onHumChange: function onHumChange(value) {
+	    this.setState({
+	      yRightDomain: value.split(',')
 	    });
 	  },
 	  componentDidMount: function componentDidMount() {},
@@ -22399,7 +22406,17 @@
 	          { className: 'input-group-addon', id: 'temp' },
 	          'Temperature [low, high]'
 	        ),
-	        React.createElement('input', { type: 'text', ref: 'yLeftDomain', className: 'form-control', placeholder: this.state.yLeftDomain, onKeyPress: this.onEnter })
+	        React.createElement('input', { type: 'text', ref: 'yLeftDomain', className: 'form-control', placeholder: this.state.yLeftDomain, onKeyPress: this.onTempEnter })
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'input-group' },
+	        React.createElement(
+	          'span',
+	          { className: 'input-group-addon', id: 'temp' },
+	          'Humidity [low, high]'
+	        ),
+	        React.createElement('input', { type: 'text', ref: 'yRightDomain', className: 'form-control', placeholder: this.state.yRightDomain, onKeyPress: this.onHumEnter })
 	      )
 	    );
 	  }
