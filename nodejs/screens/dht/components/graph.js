@@ -41,18 +41,18 @@ var chartD3 = React.createClass({
     });
   },
   componentDidMount: function () {
-    initChart(Object.assign(this.state, {
-      dht: this.props.data
-    }));
+//    initChart(Object.assign(this.state, {
+//      dht: window.data
+//    }));
   },
   componentWillUpdate: function () {
   },
   componentDidUpdate: function () {
     console.log('did update');
-//    document.getElementById('visualization').innerHTML = '';
-//    initChart(Object.assign(this.state, {
-//      dht: this.props.data
-//    }));
+    document.getElementById('visualization').innerHTML = '';
+    initChart(Object.assign(this.state, {
+      dht: window.data
+    }));
   },
   render: function () {
     return (

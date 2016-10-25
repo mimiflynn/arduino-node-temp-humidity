@@ -22381,17 +22381,17 @@
 	    });
 	  },
 	  componentDidMount: function componentDidMount() {
-	    initChart(Object.assign(this.state, {
-	      dht: this.props.data
-	    }));
+	    //    initChart(Object.assign(this.state, {
+	    //      dht: window.data
+	    //    }));
 	  },
 	  componentWillUpdate: function componentWillUpdate() {},
 	  componentDidUpdate: function componentDidUpdate() {
 	    console.log('did update');
-	    //    document.getElementById('visualization').innerHTML = '';
-	    //    initChart(Object.assign(this.state, {
-	    //      dht: this.props.data
-	    //    }));
+	    document.getElementById('visualization').innerHTML = '';
+	    initChart(Object.assign(this.state, {
+	      dht: window.data
+	    }));
 	  },
 	  render: function render() {
 	    return React.createElement(
