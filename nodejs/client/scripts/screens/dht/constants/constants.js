@@ -1,5 +1,5 @@
 module.exports = {
-  API: 'http://localhost:3000/api',
+  API: window.location.href + 'api',
 
   ActionTypes: {
     DHT_LOADED: 'DHT_LOADED',
