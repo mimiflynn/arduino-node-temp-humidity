@@ -22380,14 +22380,18 @@
 	      yRightDomain: value.split(',')
 	    });
 	  },
-	  componentDidMount: function componentDidMount() {},
-	  componentWillUpdate: function componentWillUpdate() {
-	    document.getElementById('visualization').innerHTML = '';
-	  },
-	  componentDidUpdate: function componentDidUpdate() {
+	  componentDidMount: function componentDidMount() {
 	    initChart(Object.assign(this.state, {
 	      dht: this.props.data
 	    }));
+	  },
+	  componentWillUpdate: function componentWillUpdate() {},
+	  componentDidUpdate: function componentDidUpdate() {
+	    console.log('did update');
+	    //    document.getElementById('visualization').innerHTML = '';
+	    //    initChart(Object.assign(this.state, {
+	    //      dht: this.props.data
+	    //    }));
 	  },
 	  render: function render() {
 	    return React.createElement(
