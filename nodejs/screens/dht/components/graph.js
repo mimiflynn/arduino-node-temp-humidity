@@ -45,9 +45,10 @@ var chartD3 = React.createClass({
   componentWillUpdate: function () {
   },
   componentDidUpdate: function () {
+    console.log('did update');
     document.getElementById('visualization').innerHTML = '';
     initChart(Object.assign(this.state, {
-      dht: window.data
+      dht: this.props.data
     }));
   },
   render: function () {

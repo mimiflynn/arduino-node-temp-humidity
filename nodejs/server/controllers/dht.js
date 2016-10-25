@@ -49,7 +49,7 @@ exports.latest = (req, res) => {
         error: 'Cannot list the dht'
       });
     }
-    Dht.find().limit(perPage).sort('-created').exec((err, dht) => {
+    Dht.find().limit(perPage).sort({_id:1}).exec((err, count) => {
       res.jsonp(dht);
     });
   });
