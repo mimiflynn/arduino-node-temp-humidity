@@ -6,9 +6,8 @@ var chartD3 = React.createClass({
   propTypes: {
     data: React.PropTypes.array
   },
-  componentDidMount: function () {
-    initChart({
-      dht: this.props.data,
+  getInitialState : function () {
+    return {
       width: 1000,
       height: 500,
       margins : {
@@ -19,11 +18,41 @@ var chartD3 = React.createClass({
       },
       yLeftDomain: [50, 82],
       yRightDomain: [20, 50]
+    };
+  },
+  onEnter: function (event) {
+    console.log('key ');
+    if (event.key === 'Enter') {
+      console.log('ENTER', event.target);
+      this.onTempChange(event.target.value);
+    }
+  },
+  onTempChange: function (value) {
+    console.log('value ', value);
+    this.setState({
+      yLeftDomain: value.split(',')
     });
+  },
+  componentDidMount: function () {
+
+  },
+  componentWillUpdate: function () {
+    document.getElementById('visualization').innerHTML = '';
+  },
+  componentDidUpdate: function () {
+    initChart(Object.assign(this.state, {
+      dht: this.props.data
+    }));
   },
   render: function () {
     return (
-      <h2>Temperature and humidity over time</h2>
+      <div>
+        <h2>Temperature and humidity over time</h2>
+        <div className="input-group">
+          <span className="input-group-addon" id="temp">Temperature [low, high]</span>
+          <input type="text" ref="yLeftDomain" className="form-control" placeholder={this.state.yLeftDomain} onKeyPress={this.onEnter} />
+        </div>
+      </div>
     );
   }
 });

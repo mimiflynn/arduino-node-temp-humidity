@@ -22346,9 +22346,8 @@
 	  propTypes: {
 	    data: React.PropTypes.array
 	  },
-	  componentDidMount: function componentDidMount() {
-	    initChart({
-	      dht: this.props.data,
+	  getInitialState: function getInitialState() {
+	    return {
 	      width: 1000,
 	      height: 500,
 	      margins: {
@@ -22359,13 +22358,49 @@
 	      },
 	      yLeftDomain: [50, 82],
 	      yRightDomain: [20, 50]
+	    };
+	  },
+	  onEnter: function onEnter(event) {
+	    console.log('key ');
+	    if (event.key === 'Enter') {
+	      console.log('ENTER', event.target);
+	      this.onTempChange(event.target.value);
+	    }
+	  },
+	  onTempChange: function onTempChange(value) {
+	    console.log('value ', value);
+	    this.setState({
+	      yLeftDomain: value.split(',')
 	    });
+	  },
+	  componentDidMount: function componentDidMount() {},
+	  componentWillUpdate: function componentWillUpdate() {
+	    document.getElementById('visualization').innerHTML = '';
+	  },
+	  componentDidUpdate: function componentDidUpdate() {
+	    initChart(Object.assign(this.state, {
+	      dht: this.props.data
+	    }));
 	  },
 	  render: function render() {
 	    return React.createElement(
-	      'h2',
+	      'div',
 	      null,
-	      'Temperature and humidity over time'
+	      React.createElement(
+	        'h2',
+	        null,
+	        'Temperature and humidity over time'
+	      ),
+	      React.createElement(
+	        'div',
+	        { className: 'input-group' },
+	        React.createElement(
+	          'span',
+	          { className: 'input-group-addon', id: 'temp' },
+	          'Temperature [low, high]'
+	        ),
+	        React.createElement('input', { type: 'text', ref: 'yLeftDomain', className: 'form-control', placeholder: this.state.yLeftDomain, onKeyPress: this.onEnter })
+	      )
 	    );
 	  }
 	});
