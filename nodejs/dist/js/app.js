@@ -21442,15 +21442,20 @@
 	
 	module.exports = React.createClass({
 	  displayName: 'exports',
-	
 	  componentDidMount: function componentDidMount() {
 	    Store.addChangeListener(this.handleStoreChange);
 	    ViewActionCreators.loadDht();
+	    this.pollDht();
 	  },
 	  componentWillUnmount: function componentWillUnmount() {
 	    Store.removeChangeListener(this.handleStoreChange);
+	    clearInterval(this.pollInterval);
 	  },
-	
+	  pollDht: function pollDht() {
+	    this.pollInterval = window.setInterval(function () {
+	      ViewActionCreators.loadDht();
+	    }, 60005);
+	  },
 	  handleStoreChange: function handleStoreChange() {
 	    this.setState(Store.getState());
 	  },

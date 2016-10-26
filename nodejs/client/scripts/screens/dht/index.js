@@ -6,17 +6,28 @@ var ViewActionCreators = require('./actions/ViewActionCreators');
 var Graph = require('../../../../screens/dht/components/graph');
 
 module.exports = React.createClass({
-  componentDidMount: function () {
+  componentDidMount () {
     Store.addChangeListener(this.handleStoreChange);
     ViewActionCreators.loadDht();
+    this.pollDht();
   },
+
   componentWillUnmount () {
     Store.removeChangeListener(this.handleStoreChange);
+    clearInterval(this.pollInterval);
   },
-  handleStoreChange: function () {
+
+  pollDht () {
+    this.pollInterval = window.setInterval(() => {
+      ViewActionCreators.loadDht();
+    }, 60005);
+  },
+
+  handleStoreChange () {
     this.setState(Store.getState());
   },
-  render: function () {
+
+  render () {
     console.log('STATE', this.state);
     var data = (this.state && this.state.dht) ? this.state.dht : window.data;
     return (
