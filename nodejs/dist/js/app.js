@@ -22348,7 +22348,7 @@
 	  },
 	  getInitialState: function getInitialState() {
 	    return {
-	      width: 1000,
+	      width: 800,
 	      height: 500,
 	      margins: {
 	        top: 20,
@@ -22398,7 +22398,7 @@
 	          { className: 'col-md-12' },
 	          React.createElement(
 	            'h2',
-	            null,
+	            { className: 'margin-bottom-20' },
 	            'Temperature and humidity over time'
 	          )
 	        ),
@@ -22422,12 +22422,12 @@
 	          React.createElement(
 	            'div',
 	            { className: 'input-group' },
+	            React.createElement('input', { type: 'text', ref: 'yRightDomain', className: 'form-control', placeholder: this.state.yRightDomain, onKeyPress: this.onHumEnter }),
 	            React.createElement(
 	              'span',
 	              { className: 'input-group-addon', id: 'temp' },
 	              'Humidity [low, high]'
-	            ),
-	            React.createElement('input', { type: 'text', ref: 'yRightDomain', className: 'form-control', placeholder: this.state.yRightDomain, onKeyPress: this.onHumEnter })
+	            )
 	          )
 	        )
 	      )

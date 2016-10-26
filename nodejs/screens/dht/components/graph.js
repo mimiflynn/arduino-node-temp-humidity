@@ -8,7 +8,7 @@ var chartD3 = React.createClass({
   },
   getInitialState : function () {
     return {
-      width: 1000,
+      width: 800,
       height: 500,
       margins : {
         top: 20,
@@ -51,7 +51,7 @@ var chartD3 = React.createClass({
       <div className="container">
         <div className="row margin-top-20 margin-bottom-20">
           <div className="col-md-12">
-            <h2>Temperature and humidity over time</h2>
+            <h2 className="margin-bottom-20">Temperature and humidity over time</h2>
           </div>
           <div className="col-md-6">
             <div className="input-group">
@@ -61,8 +61,8 @@ var chartD3 = React.createClass({
           </div>
           <div className="col-md-6">
             <div className="input-group">
-              <span className="input-group-addon" id="temp">Humidity [low, high]</span>
               <input type="text" ref="yRightDomain" className="form-control" placeholder={this.state.yRightDomain} onKeyPress={this.onHumEnter} />
+              <span className="input-group-addon" id="temp">Humidity [low, high]</span>
             </div>
           </div>
         </div>

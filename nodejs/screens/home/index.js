@@ -2,7 +2,6 @@ var React = require('react');
 var Dom = require('react-dom/server');
 
 var DefaultLayout = require('../layouts/default');
-var List = require('../dht/list');
 
 module.exports = React.createClass({
   propTypes: {
@@ -28,11 +27,9 @@ module.exports = React.createClass({
     var greeting = this.props.isAuthenticated ? this.loggedInGreeting() : this.guestGreeting();
     var reactHtml = Dom.renderToString(<List data={ this.props.data } />);
     var data = 'window.data = ' + JSON.stringify(this.props.data) + '';
-    var csrf = 'window.csrf = "' + this.props.csrf_token + '"';
     return (
       <DefaultLayout title={ this.props.title } scripts={ this.props.scripts } isAuthenticated={ this.props.isAuthenticated } user={ this.props.user }>
         <script dangerouslySetInnerHTML={{__html: data}} />
-        <script dangerouslySetInnerHTML={{__html: csrf}} />
         <section>
           <h2>Welcome, { greeting }!</h2>
         </section>
