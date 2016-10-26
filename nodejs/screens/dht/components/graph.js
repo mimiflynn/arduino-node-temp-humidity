@@ -1,13 +1,13 @@
-var React = require('react');
+import React, { Component, PropTypes } from 'react';
 
-var initChart = require('../../../lib/graph.js');
+import initChart from '../../../lib/graph.js';
+import List from '../../../screens/dht/components/list';
 
-var chartD3 = React.createClass({
-  propTypes: {
-    data: React.PropTypes.array
-  },
-  getInitialState : function () {
-    return {
+class chartD3 extends Component {
+  constructor (props) {
+    super(props);
+
+    this.state = {
       width: 800,
       height: 500,
       margins : {
@@ -19,34 +19,45 @@ var chartD3 = React.createClass({
       yLeftDomain: [50, 82],
       yRightDomain: [20, 50]
     };
-  },
-  onTempEnter: function (event) {
-    if (event.key === 'Enter') {
-      this.onTempChange(event.target.value);
-    }
-  },
-  onTempChange: function (value) {
-    this.setState({
-      yLeftDomain: value.split(',')
-    });
-  },
-  onHumEnter: function (event) {
-    if (event.key === 'Enter') {
-      this.onHumChange(event.target.value);
-    }
-  },
-  onHumChange: function (value) {
+
+    this.onHumChange = this.onHumChange.bind(this);
+    this.onHumEnter = this.onHumEnter.bind(this);
+    this.onTempChange = this.onTempChange.bind(this);
+    this.onTempEnter = this.onTempEnter.bind(this);
+  }
+
+  onHumChange (value) {
     this.setState({
       yRightDomain: value.split(',')
     });
-  },
-  componentDidUpdate: function () {
+  }
+
+  onHumEnter (event) {
+    if (event.key === 'Enter') {
+      this.onHumChange(event.target.value);
+    }
+  }
+
+  onTempChange (value) {
+    this.setState({
+      yLeftDomain: value.split(',')
+    });
+  }
+
+  onTempEnter (event) {
+    if (event.key === 'Enter') {
+      this.onTempChange(event.target.value);
+    }
+  }
+
+  componentDidUpdate () {
     document.getElementById('visualization').innerHTML = '';
     initChart(Object.assign(this.state, {
       dht: this.props.data
     }));
-  },
-  render: function () {
+  }
+
+  render () {
     return (
       <div className="container">
         <div className="row margin-top-20 margin-bottom-20">
@@ -66,9 +77,19 @@ var chartD3 = React.createClass({
             </div>
           </div>
         </div>
+        <div className="row">
+          <svg id="visualization" width="800" height="500" xmlns="http://www.w3.org/2000/svg" version="1.1"></svg>
+        </div>
+        <div className="row">
+          <List data={this.props.data} />
+        </div>
       </div>
     );
   }
-});
+};
+
+chartD3.propTypes = {
+  data: React.PropTypes.array
+};
 
 module.exports = chartD3;

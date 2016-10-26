@@ -9,19 +9,19 @@ const List = ({
   page,
   pages
 }) => {
-    var items = data.map(function (item, index) {
-      return (
-        <li className="list-group-item" key={ 'dht-' + index }>
-          <Item data={ item } />
-        </li>
-      );
-    });
+  var items = data.map(function (item, index) {
     return (
-      <ul className="list-group">
-        { items }
-      </ul>
+      <li className="list-group-item" key={ 'dht-' + index }>
+        <Item data={ item } />
+      </li>
     );
-  }
+  });
+  return (
+    <ul className="list-group">
+      { items }
+    </ul>
+  );
+};
 
 List.propTypes = {
   title: PropTypes.string,
