@@ -22472,6 +22472,11 @@
 	        ),
 	        _react2.default.createElement(
 	          'div',
+	          { className: 'row' },
+	          _react2.default.createElement('svg', { id: 'visualization', width: '800', height: '500', xmlns: 'http://www.w3.org/2000/svg', version: '1.1' })
+	        ),
+	        _react2.default.createElement(
+	          'div',
 	          { className: 'row margin-top-20 margin-bottom-20' },
 	          _react2.default.createElement(
 	            'div',
@@ -22501,11 +22506,6 @@
 	              )
 	            )
 	          )
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'row' },
-	          _react2.default.createElement('svg', { id: 'visualization', width: '800', height: '500', xmlns: 'http://www.w3.org/2000/svg', version: '1.1' })
 	        ),
 	        _react2.default.createElement(
 	          'div',

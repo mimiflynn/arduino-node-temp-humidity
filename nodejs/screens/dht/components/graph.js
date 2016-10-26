@@ -73,6 +73,9 @@ class chartD3 extends Component {
             <h3>Current Humidity: {this.props.data[0].humidity}</h3>
           </div>
         </div>
+        <div className="row">
+          <svg id="visualization" width="800" height="500" xmlns="http://www.w3.org/2000/svg" version="1.1"></svg>
+        </div>
         <div className="row margin-top-20 margin-bottom-20">
           <div className="col-md-6">
             <div className="input-group">
@@ -86,9 +89,6 @@ class chartD3 extends Component {
               <span className="input-group-addon" id="temp">Humidity [low, high]</span>
             </div>
           </div>
-        </div>
-        <div className="row">
-          <svg id="visualization" width="800" height="500" xmlns="http://www.w3.org/2000/svg" version="1.1"></svg>
         </div>
         <div className="row">
           <List data={this.props.data} />
