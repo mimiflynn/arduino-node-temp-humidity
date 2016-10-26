@@ -22441,10 +22441,38 @@
 	            { className: 'col-md-12' },
 	            _react2.default.createElement(
 	              'h2',
-	              { className: 'margin-bottom-20' },
+	              null,
 	              'Temperature and humidity over time'
 	            )
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'row margin-top-20 margin-bottom-20' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'col-md-6' },
+	            _react2.default.createElement(
+	              'h3',
+	              null,
+	              'Current Temperature: ',
+	              this.props.data[0].fahrenheit
+	            )
 	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'col-md-6' },
+	            _react2.default.createElement(
+	              'h3',
+	              null,
+	              'Current Humidity: ',
+	              this.props.data[0].humidity
+	            )
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'row margin-top-20 margin-bottom-20' },
 	          _react2.default.createElement(
 	            'div',
 	            { className: 'col-md-6' },

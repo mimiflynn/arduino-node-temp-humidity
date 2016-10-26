@@ -62,8 +62,18 @@ class chartD3 extends Component {
       <div className="container">
         <div className="row margin-top-20 margin-bottom-20">
           <div className="col-md-12">
-            <h2 className="margin-bottom-20">Temperature and humidity over time</h2>
+            <h2>Temperature and humidity over time</h2>
           </div>
+        </div>
+        <div className="row margin-top-20 margin-bottom-20">
+          <div className="col-md-6">
+            <h3>Current Temperature: {this.props.data[0].fahrenheit}</h3>
+          </div>
+          <div className="col-md-6">
+            <h3>Current Humidity: {this.props.data[0].humidity}</h3>
+          </div>
+        </div>
+        <div className="row margin-top-20 margin-bottom-20">
           <div className="col-md-6">
             <div className="input-group">
               <span className="input-group-addon" id="temp">Temperature [low, high]</span>
