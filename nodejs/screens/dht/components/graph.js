@@ -40,12 +40,7 @@ var chartD3 = React.createClass({
       yRightDomain: value.split(',')
     });
   },
-  componentDidMount: function () {
-  },
-  componentWillUpdate: function () {
-  },
   componentDidUpdate: function () {
-    console.log('did update');
     document.getElementById('visualization').innerHTML = '';
     initChart(Object.assign(this.state, {
       dht: this.props.data
@@ -53,15 +48,23 @@ var chartD3 = React.createClass({
   },
   render: function () {
     return (
-      <div>
-        <h2>Temperature and humidity over time</h2>
-        <div className="input-group">
-          <span className="input-group-addon" id="temp">Temperature [low, high]</span>
-          <input type="text" ref="yLeftDomain" className="form-control" placeholder={this.state.yLeftDomain} onKeyPress={this.onTempEnter} />
-        </div>
-        <div className="input-group">
-          <span className="input-group-addon" id="temp">Humidity [low, high]</span>
-          <input type="text" ref="yRightDomain" className="form-control" placeholder={this.state.yRightDomain} onKeyPress={this.onHumEnter} />
+      <div className="container">
+        <div className="row margin-top-20 margin-bottom-20">
+          <div className="col-md-12">
+            <h2>Temperature and humidity over time</h2>
+          </div>
+          <div className="col-md-6">
+            <div className="input-group">
+              <span className="input-group-addon" id="temp">Temperature [low, high]</span>
+              <input type="text" ref="yLeftDomain" className="form-control" placeholder={this.state.yLeftDomain} onKeyPress={this.onTempEnter} />
+            </div>
+          </div>
+          <div className="col-md-6">
+            <div className="input-group">
+              <span className="input-group-addon" id="temp">Humidity [low, high]</span>
+              <input type="text" ref="yRightDomain" className="form-control" placeholder={this.state.yRightDomain} onKeyPress={this.onHumEnter} />
+            </div>
+          </div>
         </div>
       </div>
     );

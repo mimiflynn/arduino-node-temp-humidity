@@ -22380,10 +22380,7 @@
 	      yRightDomain: value.split(',')
 	    });
 	  },
-	  componentDidMount: function componentDidMount() {},
-	  componentWillUpdate: function componentWillUpdate() {},
 	  componentDidUpdate: function componentDidUpdate() {
-	    console.log('did update');
 	    document.getElementById('visualization').innerHTML = '';
 	    initChart(Object.assign(this.state, {
 	      dht: this.props.data
@@ -22392,31 +22389,47 @@
 	  render: function render() {
 	    return React.createElement(
 	      'div',
-	      null,
-	      React.createElement(
-	        'h2',
-	        null,
-	        'Temperature and humidity over time'
-	      ),
+	      { className: 'container' },
 	      React.createElement(
 	        'div',
-	        { className: 'input-group' },
+	        { className: 'row margin-top-20 margin-bottom-20' },
 	        React.createElement(
-	          'span',
-	          { className: 'input-group-addon', id: 'temp' },
-	          'Temperature [low, high]'
+	          'div',
+	          { className: 'col-md-12' },
+	          React.createElement(
+	            'h2',
+	            null,
+	            'Temperature and humidity over time'
+	          )
 	        ),
-	        React.createElement('input', { type: 'text', ref: 'yLeftDomain', className: 'form-control', placeholder: this.state.yLeftDomain, onKeyPress: this.onTempEnter })
-	      ),
-	      React.createElement(
-	        'div',
-	        { className: 'input-group' },
 	        React.createElement(
-	          'span',
-	          { className: 'input-group-addon', id: 'temp' },
-	          'Humidity [low, high]'
+	          'div',
+	          { className: 'col-md-6' },
+	          React.createElement(
+	            'div',
+	            { className: 'input-group' },
+	            React.createElement(
+	              'span',
+	              { className: 'input-group-addon', id: 'temp' },
+	              'Temperature [low, high]'
+	            ),
+	            React.createElement('input', { type: 'text', ref: 'yLeftDomain', className: 'form-control', placeholder: this.state.yLeftDomain, onKeyPress: this.onTempEnter })
+	          )
 	        ),
-	        React.createElement('input', { type: 'text', ref: 'yRightDomain', className: 'form-control', placeholder: this.state.yRightDomain, onKeyPress: this.onHumEnter })
+	        React.createElement(
+	          'div',
+	          { className: 'col-md-6' },
+	          React.createElement(
+	            'div',
+	            { className: 'input-group' },
+	            React.createElement(
+	              'span',
+	              { className: 'input-group-addon', id: 'temp' },
+	              'Humidity [low, high]'
+	            ),
+	            React.createElement('input', { type: 'text', ref: 'yRightDomain', className: 'form-control', placeholder: this.state.yRightDomain, onKeyPress: this.onHumEnter })
+	          )
+	        )
 	      )
 	    );
 	  }
