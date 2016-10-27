@@ -2,15 +2,17 @@
 
 Work in progress.
 
-Will eventually be a browser based interface to view temperature and humidity data from an Arduino with a DHT22 sensor.
+Browser based interface to view temperature and humidity data from an Arduino with a DHT22 sensor.
+
+## Features
+
+Track minute by minute temperature and humidity data via website and / or [MagicMirrorModule](https://github.com/mimiflynn/MMM-temphumidity).
 
 ## Purpose and Objectives and Stuff
 
-Track minute by minute temperature and humidity data.
-
 Overall, I started this project in an attempt to collect large amounts of data and render SVG's via React and D3 on the server and update the UI in the browser upon the arrival of new data points.
 
-I would like to thank my darling orchid as the true inspiration for this project. Although neglect is highly suggested in regards to orchid care, I've decided to further explore environmental variables to better understand my darling plant.
+I would like to thank my darling orchid as the true inspiration for this project. Although neglect is highly suggested in regards to orchid care, I've decided to further explore environmental variables to better understand my plant. (Update: may orchid rest in peace).
 
 ## Requirements
 
@@ -20,6 +22,9 @@ I would like to thank my darling orchid as the true inspiration for this project
 - Arduino IDE
 - [DHT Sensor Library](https://github.com/adafruit/DHT-sensor-library)
 - [ArduionJson Library](https://github.com/bblanchon/ArduinoJson)
+
+Optional
+- Raspberry Pi 3 (server for app)
 
 ## Usage
 
