@@ -20,8 +20,9 @@ I would like to thank my darling orchid as the true inspiration for this project
 - Arduino
 - DHT22 sensor
 - Arduino IDE
-- [DHT Sensor Library](https://github.com/adafruit/DHT-sensor-library)
+- [DHT Sensor Library](https://github.com/mimiflynn/DHT-sensor-library)
 - [ArduionJson Library](https://github.com/bblanchon/ArduinoJson)
+- [Adafruit sensor library](https://github.com/adafruit/Adafruit_Sensor)
 
 Optional
 - Raspberry Pi 3 (server for app)
