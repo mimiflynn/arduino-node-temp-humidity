@@ -55,6 +55,26 @@ exports.latest = (req, res) => {
   });
 };
 
+exports.now = (req, res) => {
+  var page = (req.params.page > 0 ? req.params.page : 1) - 1;
+  var perPage = 1;
+  var options = {
+    perPage: perPage,
+    page: page
+  };
+
+  Dht.list(options, (err, dht) => {
+    if (err) {
+      return res.status(500).json({
+        error: 'Cannot list the dht'
+      });
+    }
+    Dht.find().limit(perPage).sort({_id:1}).exec((err, count) => {
+      res.jsonp(dht);
+    });
+  });
+};
+
 /**
  * ----------- Server side pages ----------- *
  */
