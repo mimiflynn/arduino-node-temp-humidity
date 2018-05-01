@@ -12,8 +12,11 @@
   },
   "scripts": {
     "lint": "eslint .",
-    "start": "NODE_PATH=./config:./server/controllers NODE_ENV=development ./node_modules/.bin/nodemon server.js --exec babel-node",
-    "dev": "SENSOR=false NODE_PATH=./config:./server/controllers NODE_ENV=development ./node_modules/.bin/nodemon server.js --exec babel-node"
+    "start": "NODE_PATH=./config:./server/controllers NODE_ENV=development node ./build/server.js",
+    "dev": "SENSOR=false NODE_PATH=./config:./server/controllers NODE_ENV=development ./node_modules/.bin/nodemon server.js --exec babel-node",
+    "clean": "rm -rf build && mkdir build",
+    "build-server": "babel server.js -d ./build && babel -d ./build/server ./server -s && babel -d ./build/lib ./lib -s",
+    "build": "npm run clean && npm run build-server"
   },
   "dependencies": {
     "async": "1.3.0",
